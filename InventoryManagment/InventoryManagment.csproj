@@ -59,6 +59,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\hopital.png" />
+	  <None Remove="Resources\Images\plus.png" />
 	</ItemGroup>
 
 	<ItemGroup>
