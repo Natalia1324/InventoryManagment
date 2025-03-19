@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="InventoryManagment.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:InventoryManagment.Views"
+    Shell.FlyoutBehavior="Locked"
+    Title="InventoryManagment"
+    FlyoutBackgroundColor="#003366">
+
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="50, 20, 0, 20" BackgroundColor="White">
+            <Label Text="Helplast Magazyn" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   TextColor="#003366"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem Title="Dodaj dokument">
+        
+        <ShellContent  ContentTemplate="{DataTemplate views:DocumentPageAlt}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Zobacz dokumenty">
+        <ShellContent ContentTemplate="{DataTemplate views:DocumentListPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Zobacz produkty">
+        <ShellContent ContentTemplate="{DataTemplate views:ProductManagementPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Zobacz transakcje">
+        <ShellContent ContentTemplate="{DataTemplate views:TransactionsPage}" />
+    </FlyoutItem>
+
+</Shell>

@@ -1,0 +1,32 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="InventoryManagment.Views.DocumentPage">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <!-- Typ dokumentu -->
+            <Label Text="Typ dokumentu" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                <Button Text="Rozchod" x:Name="RozchodButton" Clicked="OnTypeSelected" BackgroundColor="LightGray"/>
+                <Button Text="Przychód Zewnętrzny" x:Name="PrzychodZewButton" Clicked="OnTypeSelected" BackgroundColor="LightGray"/>
+                <Button Text="Przychód Wewnętrzny" x:Name="PrzychodWewButton" Clicked="OnTypeSelected" BackgroundColor="LightGray"/>
+            </StackLayout>
+
+            <!-- Przeznaczenie i kalendarz -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <Entry x:Name="PrzeznaczenieEntry" Placeholder="Odbiorca" WidthRequest="150" />
+                <DatePicker x:Name="DataWystawieniaPicker" Date="{x:Static sys:DateTime.Now}" Format="dd/MM/yyyy" />
+            </StackLayout>
+
+            <!-- Transakcje -->
+            <Label Text="Transakcje" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <StackLayout x:Name="TransactionsStack" Spacing="10">
+                <!-- Pola transakcji dodawane dynamicznie -->
+            </StackLayout>
+            <Button Text="+" FontSize="20" Clicked="AddTransactionForm" HorizontalOptions="End" />
+
+            <!-- Dodaj dokument -->
+            <Button Text="Dodaj dokument" Clicked="AddDocument" BackgroundColor="LightGreen" HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

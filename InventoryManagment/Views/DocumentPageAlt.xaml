@@ -1,0 +1,53 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.DocumentPageAlt">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <!-- Typ dokumentu -->
+            <Label Text="Typ dokumentu" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                <Button Text="Rozchod" x:Name="RozchodButton" Clicked="OnTypeSelected" BackgroundColor="DarkGray"/>
+                <Button Text="Przychód Zewnętrzny" x:Name="PrzychodZewButton" Clicked="OnTypeSelected" BackgroundColor="DarkGray"/>
+                <Button Text="Przychód Wewnętrzny" x:Name="PrzychodWewButton" Clicked="OnTypeSelected" BackgroundColor="DarkGray"/>
+            </StackLayout>
+
+            <!-- Przeznaczenie i kalendarz -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <Image x:Name="PrzezImage" Source="hopital.png" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" Opacity="0.5" />
+                <Frame x:Name="PrzezFrame"
+                   BorderColor="DarkGray"
+                   CornerRadius="10"
+                   Padding="5"
+                   HasShadow="True"
+                   VerticalOptions="Center"
+                   BackgroundColor="White">
+                       <Entry x:Name="PrzeznaczenieEntry"
+                       Placeholder="Odbiorca"
+                       FontSize="20"
+                       WidthRequest="450"
+                       BackgroundColor="Transparent" />
+                </Frame>
+                <DatePicker x:Name="DataWystawieniaPicker" Format="dd/MM/yyyy" HeightRequest="40"/>
+            </StackLayout>
+
+            <!-- Transakcje -->
+            <Label Text="Transakcje" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <ScrollView HorizontalOptions="Center">
+                <Grid x:Name="TransactionsGrid" ColumnSpacing="10" RowSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollView>
+            <Button Text="Dodaj produkt" Clicked="GoToProductList" HorizontalOptions="Center" BackgroundColor="DarkBlue" />
+
+
+            <!-- Dodaj dokument -->
+            <Button Text="Dodaj dokument" Clicked="AddDocument" BackgroundColor="DarkGreen" HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

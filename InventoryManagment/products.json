@@ -1,0 +1,547 @@
+[
+  {
+    "Rozmiar": "120/150",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "ŚWIECIE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120/150",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "ŚWIĘCICKI",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120/150",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "ŚWIECIE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120/150",
+    "Grubosc": null,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BEZBARWNE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.033,
+    "Kolor": "BEZBARWNY",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BEZBARWNY",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.028,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.03,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BRĄZOWE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "BRĄZOWE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.028,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "Zabrze Serca",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.03,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.035,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "ŁAŃCUT",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "HAJNÓWKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "NYSA X2",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.028,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "Zabrze Serca",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GŁOGÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "PODWÓJNE CEPELEK",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "FIOLETOWE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "FIOLETOWE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "HAJNÓWKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.028,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.03,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "OLESNO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": 0.028,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": 0.028,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "PIOTRKÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "55/80",
+    "Grubosc": 0.04,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Tarnów",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.028,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "MIKULICZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "OLESNO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/120",
+    "Grubosc": 0.03,
+    "Kolor": "BEZBARWNE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "JONSCHERA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/160",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "JURASZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": 0.033,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "NYSA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/130",
+    "Grubosc": 0.04,
+    "Kolor": "CZERWONE",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PIOTRKÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Fartuchy",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Fartuchy 140",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Kozetki",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "worki na zwłoki",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "worki na zwłoki",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "worki na zwłoki",
+    "Grubosc": null,
+    "Kolor": "CZARNE",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": "RZEPY"
+  }
+]

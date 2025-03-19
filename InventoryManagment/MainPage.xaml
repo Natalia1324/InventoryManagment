@@ -1,0 +1,11 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.MainPage">
+    <StackLayout Padding="20" VerticalOptions="Center" Spacing="10">
+        <Button Text="Dodaj dokument" Clicked="GoToDocumentPage" />
+        <Button Text="Zobacz dokumenty" Clicked="GoToDocumentListPage" />
+        <!--<Button Text="Zobacz stany" Clicked="GoToStanMagazynu" />-->
+        <Button Text="Zobacz produkty" Clicked="GoToProductListPage" />
+        <Button Text="Zobacz transakcje" Clicked="GoToTransactionsPage" />
+    </StackLayout>
+</ContentPage>

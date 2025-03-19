@@ -1,0 +1,96 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:InventoryManagment"
+      
+             x:Class="InventoryManagment.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <!-- Domyślne tło -->
+                <Setter Property="TextColor" Value="Black" />
+                <!-- Kolor tekstu -->
+
+                <!-- VisualStateManager dla efektu hover -->
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+                            <!-- Normalny stan -->
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightGray" />
+                                    <Setter Property="TextColor" Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <!-- Hover (PointerOver) -->
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="DarkGray" />
+                                    <!-- Tło na hover -->
+                                    <Setter Property="TextColor" Value="White" />
+                                    <!-- Tekst na hover -->
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="Button">
+                <!-- Domyślny wygląd przycisku -->
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="FontSize" Value="14" />
+
+                <!-- Dodanie VisualStateManager do obsługi animacji hover -->
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+                            <!-- Normalny stan -->
+                            <VisualState Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="LightGray" />
+                                    <Setter Property="TextColor" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <!-- Hover (PointerOver) -->
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Blue" />
+                                    <!-- Zmiana tła -->
+                                    <Setter Property="TextColor" Value="White" />
+                                    <!-- Zmiana koloru tekstu -->
+                                    <Setter Property="Scale" Value="1.1" />
+                                    <!-- Powiększenie przycisku -->
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <!-- Stan kliknięcia (Pressed) -->
+                            <VisualState Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="DarkBlue" />
+                                    <!-- Kliknięte tło -->
+                                    <Setter Property="TextColor" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style TargetType="Label"
+    Class="FlyoutItemLabelStyle">
+                <Setter Property="TextColor"
+         Value="White" />
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

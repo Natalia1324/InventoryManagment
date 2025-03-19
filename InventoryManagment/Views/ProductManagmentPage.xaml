@@ -1,0 +1,29 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.ProductManagementPage">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *" Padding="20" RowSpacing="0">
+        <!-- Tytuł i przycisk -->
+        <Grid ColumnDefinitions="*, Auto" Row="0" Margin="0,0,0,20">
+            <Label Text="Lista produktów" FontSize="24" FontAttributes="Bold" VerticalOptions="Center"  />
+            <Button Text="Dodaj produkt" Clicked="OnAddProductClicked" Grid.Column="1" />
+        </Grid>
+
+        <!-- Wyszukiwarka -->
+        <SearchBar x:Name="ProductSearchBar" Placeholder="Wyszukaj produkt..." TextChanged="OnSearchTextChanged" Grid.Row="1" Margin="0,0,0,10"/>
+
+        <!-- Nagłówki tabeli -->
+        <Grid ColumnDefinitions="2*, *, Auto" BackgroundColor="#e0e0e0" Padding="5" Margin="0" Grid.Row="2">
+            <Label Text="Nazwa" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" />
+            <Label Text="Stan" Margin="0,0,25,0" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" />
+            <Label Text="Edycja" Margin="0,0,35,0" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" />
+        </Grid>
+
+        <!-- Scrollowalna tabela produktów -->
+        <ScrollView Grid.Row="3" Margin="0" Padding="0" BackgroundColor="Transparent">
+            <VerticalStackLayout x:Name="ProductRowsStack" Spacing="0" Margin="0">
+                <!-- Dynamiczne wiersze z produktami będą dodawane tutaj -->
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

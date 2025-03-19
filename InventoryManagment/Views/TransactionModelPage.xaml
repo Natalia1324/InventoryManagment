@@ -1,0 +1,14 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.TransactionModelPage">
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="Dodaj/Edytuj Transakcję" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+        <Entry x:Name="DostawcaEntry" Placeholder="Dostawca" />
+        <Entry x:Name="IloscEntry" Placeholder="Ilość" Keyboard="Numeric"/>
+        <Editor x:Name="NotatkaEditor" Placeholder="Notatka" AutoSize="TextChanges"/>
+
+        <Button Text="Zapisz" Clicked="OnSaveClicked" BackgroundColor="DarkGreen" />
+        <Button Text="Anuluj" Clicked="OnCancelClicked" BackgroundColor="DarkRed" />
+    </StackLayout>
+</ContentPage>
