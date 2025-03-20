@@ -23,10 +23,10 @@ namespace InventoryManagment
         {
             await Navigation.PushAsync(new DocumentListPage());
         }
-        private async void GoToStanMagazynu(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ProductStockPage());
-        }
+        //private async void GoToStanMagazynu(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new ProductStockPage());
+        //}
         private async void GoToProductListPage (object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProductManagementPage());

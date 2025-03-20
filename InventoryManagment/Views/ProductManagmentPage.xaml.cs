@@ -25,21 +25,21 @@ namespace InventoryManagment.Views
             LoadProductsAndStock();
         }
 
-        private async void LoadProductsAndStock()
-        {
-            var produkty = await _dbService.GetProdukty();
-            var transakcje = await _dbService.GetTransakcje();
-            var dokumenty = await _dbService.GetDokumenty();
+        //private async void LoadProductsAndStock()
+        //{
+        //    var produkty = await _dbService.GetProdukty();
+        //    var transakcje = await _dbService.GetTransakcje();
+        //    var dokumenty = await _dbService.GetDokumenty();
 
-            _productWithStock = produkty.Select(p => new ProductWithStock
-            {
-                Produkt = p,
-                Stock = transakcje.Where(t => t.ProduktId == p.Id)
-                                  .Sum(t => GetStockChange(t, dokumenty))
-            }).ToList();
+        //    _productWithStock = produkty.Select(p => new ProductWithStock
+        //    {
+        //        Produkt = p,
+        //        Stock = transakcje.Where(t => t.ProduktId == p.Id)
+        //                          .Sum(t => GetStockChange(t, dokumenty))
+        //    }).ToList();
 
-            RenderProductList(_productWithStock);
-        }
+        //    RenderProductList(_productWithStock);
+        //}
 
         private int GetStockChange(Transakcje t, List<Dokumenty> dokumenty)
         {
@@ -54,6 +54,23 @@ namespace InventoryManagment.Views
                 _ => 0
             };
         }
+
+        private async void LoadProductsAndStock()
+        {
+            var produkty = (await _dbService.GetProdukty()).Where(p => !p.isDel).ToList();
+            var transakcje = await _dbService.GetTransakcje();
+            var dokumenty = await _dbService.GetDokumenty();
+
+            _productWithStock = produkty.Select(p => new ProductWithStock
+            {
+                Produkt = p,
+                Stock = transakcje.Where(t => t.ProduktId == p.Id)
+                                  .Sum(t => GetStockChange(t, dokumenty))
+            }).ToList();
+
+            RenderProductList(_productWithStock);
+        }
+
 
         private void RenderProductList(List<ProductWithStock> products)
         {
@@ -93,7 +110,7 @@ namespace InventoryManagment.Views
                     Text = item.Stock.ToString() + " szt.",
                     HorizontalTextAlignment = TextAlignment.Center,
                     VerticalTextAlignment = TextAlignment.Center,
-                    Margin = new Thickness (0,0,20,0),
+                    Margin = new Thickness(0, 0, 20, 0),
                     FontSize = 14
                 };
                 grid.Add(stockLabel, 1, 0);
@@ -105,7 +122,7 @@ namespace InventoryManagment.Views
                     BackgroundColor = Colors.SteelBlue,
                     CornerRadius = 5,
                     Padding = new Thickness(10, 5),
-                    Margin = new Thickness(0,0,30,0),
+                    Margin = new Thickness(0, 0, 30, 0),
                     HorizontalOptions = LayoutOptions.Center,
                     WidthRequest = 50,
                     HeightRequest = 40
@@ -121,7 +138,6 @@ namespace InventoryManagment.Views
                 ProductRowsStack.Children.Add(grid);
             }
         }
-
 
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {

@@ -23,7 +23,9 @@ namespace InventoryManagment.Views
         {
             base.OnAppearing();
             // Pobierz pełną listę dokumentów
-            _allDocuments = await _dbService.GetDokumenty();
+            _allDocuments = (await _dbService.GetDokumenty())
+                .Where(d => d.Przeznaczenie != "Wyrównanie Stanu Magazynowego")
+                .ToList();
             DocumentListView.ItemsSource = _allDocuments;
         }
 

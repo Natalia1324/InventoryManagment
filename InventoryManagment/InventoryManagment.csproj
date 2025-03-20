@@ -80,9 +80,6 @@
 	  <Compile Update="Views\ProductManagmentPage.xaml.cs">
 	    <DependentUpon>ProductManagmentPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\ProductStockPage.xaml.cs">
-	    <DependentUpon>ProductStockPage.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -102,9 +99,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProductSelectionPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ProductStockPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TransactionModelPage.xaml">

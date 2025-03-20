@@ -28,7 +28,7 @@ public partial class ProductSelectionPage : ContentPage
 
     private async Task LoadProductsAndStock()
     {
-        var produkty = await _dbService.GetProdukty();
+        var produkty = (await _dbService.GetProdukty()).Where(p => !p.isDel).ToList();
         var transakcje = await _dbService.GetTransakcje();
         var dokumenty = await _dbService.GetDokumenty();
 

@@ -9,6 +9,7 @@
         <Entry x:Name="IloscEntry" Placeholder="Ilość w paczce" Keyboard="Numeric" />
         <Entry x:Name="PrzeznaczenieEntry" Placeholder="Przeznaczenie" />
         <Entry x:Name="OpisEntry" Placeholder="Opis" />
+        <Entry x:Name="StockEntry" Placeholder="Stan magazynowy"/>
 
         <Button Text="Zapisz" Clicked="OnSaveClicked" BackgroundColor="Green" TextColor="White" />
         <Button Text="Usuń" Clicked="OnDeleteClicked" BackgroundColor="Red" TextColor="White" IsVisible="False" x:Name="DeleteButton" />
