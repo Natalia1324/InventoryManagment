@@ -9,6 +9,8 @@ using Microsoft.Maui.LifecycleEvents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml;
 using Windows.Foundation;
+using Acr.UserDialogs;
+using CommunityToolkit.Maui;
 
 namespace InventoryManagment
 {

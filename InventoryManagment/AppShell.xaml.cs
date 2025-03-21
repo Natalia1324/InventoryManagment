@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using InventoryManagment.Data;
 using InventoryManagment.Views;
+using Acr.UserDialogs; // Dodaj ten using, jeśli jeszcze go nie masz
+
 namespace InventoryManagment
 {
     public partial class AppShell : Shell
@@ -24,6 +26,7 @@ namespace InventoryManagment
         {
             try
             {
+
                 // Ścieżka do pliku bazy danych
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Inventory_Managment_db.db3");
                 string tempDbPath = Path.Combine(FileSystem.CacheDirectory, "Inventory_Managment_copydb.db3");
@@ -51,6 +54,9 @@ namespace InventoryManagment
             {
                 Debug.WriteLine($"[Export Error] {ex.Message}");
                 await DisplayAlert("Błąd", "Nie udało się wyeksportować bazy.", "OK");
+            }
+            finally
+            {
             }
         }
 
