@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="InventoryManagment.Views.TransactionsPage">
-    <Grid RowDefinitions="Auto, *">
-        <Label Grid.Row="0" Text="Lista Transakcji" FontSize="24" FontAttributes="Bold" HeightRequest="50" Margin="20,20,0,0"/>
-        <Grid Grid.Row="1" RowDefinitions="Auto, Auto, *" Padding="20">
-
+             x:Class="InventoryManagment.Views.TransactionForProductPage">
+    <StackLayout>
+        <Label Text="Historia Przychodów i Rozchodów" FontSize="24" FontAttributes="Bold" HeightRequest="50" Margin="20,20,0,0"/>
+        <Grid RowDefinitions="Auto, Auto, *" Padding="20">
             <!-- Wiersz wyszukiwania -->
             <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5" Grid.Row="0">
                 <Entry Placeholder="Filtruj po produkcie" TextChanged="OnFilterChanged" x:Name="ProductFilter" />
@@ -27,23 +27,28 @@
                 <Label Text="Notatka" FontAttributes="Bold" Grid.Column="6" />
             </Grid>
 
-            <CollectionView Grid.Row="2" ItemsSource="{Binding FilteredTransactions}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BorderColor="Gray" CornerRadius="0" Padding="0" Margin="0,0,0,5">
-                            <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5">
-                                <Label Text="{Binding Produkt}" />
-                                <Label Text="{Binding Przeznaczenie}" Grid.Column="1" />
-                                <Label Text="{Binding TypDokumentu}" Grid.Column="2" />
-                                <Label Text="{Binding Dostawca}" Grid.Column="3" />
-                                <Label Text="{Binding DataWystawienia, StringFormat='{0:yyyy-MM-dd}'}" Grid.Column="4" />
-                                <Label Text="{Binding ZmianaStanu}" Grid.Column="5" />
-                                <Label Text="{Binding Notatka}" Grid.Column="6" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <!-- Przewijalna lista transakcji -->
+            <ScrollView VerticalScrollBarVisibility="Always" Grid.Row="2">
+                <CollectionView ItemsSource="{Binding FilteredTransactions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Gray" CornerRadius="0" Padding="0" Margin="0,0,0,5">
+                                <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5">
+                                    <Label Text="{Binding Produkt}" />
+                                    <Label Text="{Binding Przeznaczenie}" Grid.Column="1" />
+                                    <Label Text="{Binding TypDokumentu}" Grid.Column="2" />
+                                    <Label Text="{Binding Dostawca}" Grid.Column="3" />
+                                    <Label Text="{Binding DataWystawienia, StringFormat='{0:yyyy-MM-dd}'}" Grid.Column="4" />
+                                    <Label Text="{Binding ZmianaStanu}" Grid.Column="5" />
+                                    <Label Text="{Binding Notatka}" Grid.Column="6" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+            </ScrollView>
         </Grid>
-    </Grid>
+    </StackLayout>
 </ContentPage>

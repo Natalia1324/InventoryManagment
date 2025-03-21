@@ -46,22 +46,26 @@ namespace InventoryManagment.Views
                 ProduktId = produkt?.Id ?? 0
             };
 
-            var modalPage = new TransactionModelPage(transaction);
-            //await Task.Delay(500);
-            await Navigation.PushModalAsync(modalPage);
-            Debug.WriteLine(modalPage.IsSaved);
+            // Uzupełniamy Dostawcę, jeśli typ dokumentu to przychód
+            if (_selectedTypDokumentu == TypDokumentu.Przychod_Zewnetrzny ||
+                _selectedTypDokumentu == TypDokumentu.Przychod_Wewnetrzny)
+            {
+                transaction.Dostawca = PrzeznaczenieEntry.Text;
+            }
+            await Navigation.PopToRootAsync();
 
-            // Po zamknięciu modału, sprawdź IsSaved
+            var modalPage = new TransactionModelPage(transaction);
+            await Navigation.PushModalAsync(modalPage);
+
             modalPage.Disappearing += async (s, e) =>
             {
-                await Navigation.PopAsync();
                 if (modalPage.IsSaved)
                 {
                     if (existingTransaction == null)
                     {
                         _transactions.Add(transaction);
                     }
-                    await RefreshTransactionList(); // Teraz async
+                    await RefreshTransactionList();
                 }
             };
         }
@@ -173,8 +177,6 @@ namespace InventoryManagment.Views
         }
 
 
-
-
         private void OnTypeSelected(object sender, EventArgs e)
         {
             RozchodButton.BackgroundColor = Colors.DarkGray;
@@ -210,9 +212,8 @@ namespace InventoryManagment.Views
             }
             if (_selectedTypDokumentu == TypDokumentu.Przychod_Zewnetrzny)
             {
-                PrzeznaczenieEntry.IsVisible = false;
-                PrzezImage.IsVisible = false;
-                PrzezFrame.IsVisible = false;
+                PrzeznaczenieEntry.Placeholder = "Dostawca";
+                PrzeznaczenieEntry.Text = "";
             }
 
         }

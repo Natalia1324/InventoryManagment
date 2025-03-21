@@ -3,12 +3,19 @@ using InventoryManagment.Data;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagment.Models;
 using InventoryManagment.Views;
+using Microsoft.Maui.Handlers;
+using System.Diagnostics;
+using Microsoft.Maui.LifecycleEvents;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml;
+using Windows.Foundation;
 
 namespace InventoryManagment
 {
     public static class MauiProgram
     {
-
+        public static event TypedEventHandler<FrameworkElement, KeyRoutedEventArgs> OnKeyDown;
+        public static event TypedEventHandler<FrameworkElement, KeyRoutedEventArgs> OnKeyUp;
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -20,6 +27,27 @@ namespace InventoryManagment
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.ConfigureLifecycleEvents(events =>
+            {
+                events.AddWindows(window =>
+                {
+                    window.OnWindowCreated(win =>
+                    {
+                        if (win.Content is FrameworkElement frameworkElement)
+                        {
+                            frameworkElement.AddHandler(UIElement.KeyDownEvent, new KeyEventHandler((sender, e) =>
+                            {
+                                OnKeyDown?.Invoke(frameworkElement, e);
+                            }), true);
+
+                            frameworkElement.AddHandler(UIElement.KeyUpEvent, new KeyEventHandler((sender, e) =>
+                            {
+                                OnKeyUp?.Invoke(frameworkElement, e);
+                            }), true);
+                        }
+                    });
+                });
+            });
             builder.Services.AddSingleton<LocalDbService>();
             //builder.Services.AddTransient<DocumentPageAlt>();
             //builder.Services.AddTransient<DocumentListPage>();
@@ -40,5 +68,6 @@ namespace InventoryManagment
 
             return app;
         }
+
     }
 }

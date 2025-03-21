@@ -1,7 +1,11 @@
 ﻿using InventoryManagment.Data;
 using InventoryManagment.Models;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml;
 using System;
+using System.Diagnostics;
 
 namespace InventoryManagment.Views
 {
@@ -10,6 +14,7 @@ namespace InventoryManagment.Views
         private readonly LocalDbService _dbService;
         private Produkty _product;
         private int _initialStock;
+        private int _oldStock;
 
         public ProductEditPage(Produkty product)
         {
@@ -17,6 +22,28 @@ namespace InventoryManagment.Views
             _dbService = App.Services.GetRequiredService<LocalDbService>();
             _product = product ?? new Produkty();
             PopulateFields();
+            MauiProgram.OnKeyDown += HandleKeyDown;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.Focus(); // Wymuszenie fokusu na stronie
+        }
+        private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
+        {
+            Debug.WriteLine($"Key Pressed: {e.Key}");
+
+            if (e.Key == Windows.System.VirtualKey.Escape)
+            {
+                Navigation.PopAsync(); // Powrót do poprzedniej strony
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MauiProgram.OnKeyDown -= HandleKeyDown;  // Odsuń subskrypcję przy zamykaniu
         }
         private int GetStockChange(Transakcje t, List<Dokumenty> dokumenty)
         {
@@ -71,6 +98,13 @@ namespace InventoryManagment.Views
                 isDel = false
             };
 
+            bool isProductChanged = _product.Rozmiar != newProduct.Rozmiar ||
+                                    _product.Grubosc != newProduct.Grubosc ||
+                                    _product.Kolor != newProduct.Kolor ||
+                                    _product.Ilosc_Paczka != newProduct.Ilosc_Paczka ||
+                                    _product.Przeznaczenie != newProduct.Przeznaczenie ||
+                                    _product.Opis != newProduct.Opis;
+
             if (_product.Id == 0)
             {
                 await _dbService.CreateProdukt(newProduct);
@@ -78,15 +112,30 @@ namespace InventoryManagment.Views
             }
             else
             {
-                await UpdateStock();
-                _product.Rozmiar = newProduct.Rozmiar;
-                _product.Grubosc = newProduct.Grubosc;
-                _product.Kolor = newProduct.Kolor;
-                _product.Ilosc_Paczka = newProduct.Ilosc_Paczka;
-                _product.Przeznaczenie = newProduct.Przeznaczenie;
-                _product.Opis = newProduct.Opis;
-                await _dbService.UpdateProdukt(_product);
-                await DisplayAlert("Zapisano", "Produkt został zaktualizowany.", "OK");
+                if (!isProductChanged)
+                {
+                    await UpdateStock();
+                }
+                else
+                {
+                    // Oznacz stary produkt jako usunięty
+                    _product.isDel = true;
+                    await _dbService.UpdateProdukt(_product);
+
+                    // Dodaj nowy produkt
+                    await _dbService.CreateProdukt(newProduct);
+
+                    if (!StockExport.IsChecked)
+                    {
+                        Debug.WriteLine(StockEntry.Text);
+                        int.TryParse(StockEntry.Text.Replace(" ", ""), out var stock);
+                        //_initialStock = -stock;
+                        _initialStock = 0;
+                        _product = newProduct; // Aktualizuj referencję do nowego produktu
+                        await UpdateStock();
+                    }
+                    await DisplayAlert("Zmieniono", "Produkt został zaktualizowany poprzez utworzenie nowej wersji.", "OK");
+                }
             }
 
             await Navigation.PopAsync();
@@ -97,7 +146,7 @@ namespace InventoryManagment.Views
             var newStock = int.TryParse(StockEntry.Text.Replace(" ", ""), out var stock) ? stock : _initialStock;
 
             var stockDifference = newStock - _initialStock;
-
+            Debug.WriteLine($"Różnica w stock: {stockDifference}");
             if (stockDifference != 0)
             {
                 var currentMonth = DateTime.Now.Month;
@@ -120,7 +169,7 @@ namespace InventoryManagment.Views
                 {
                     ProduktId = _product.Id,
                     DokumentId = dokument.Id,
-                    Zmiana_Stanu = stockDifference
+                    Zmiana_Stanu = Math.Abs(stockDifference)
                 };
 
                 await _dbService.CreateTransakcja(transakcja);

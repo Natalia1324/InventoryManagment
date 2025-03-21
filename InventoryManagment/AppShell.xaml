@@ -36,4 +36,6 @@
         <ShellContent ContentTemplate="{DataTemplate views:TransactionsPage}" />
     </FlyoutItem>
 
+    <MenuItem Text="Eksportuj bazę do Google Drive"
+          Clicked="OnExportDatabaseClicked"/>
 </Shell>

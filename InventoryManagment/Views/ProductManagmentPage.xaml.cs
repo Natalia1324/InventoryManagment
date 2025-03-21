@@ -57,7 +57,7 @@ namespace InventoryManagment.Views
 
         private async void LoadProductsAndStock()
         {
-            var produkty = (await _dbService.GetProdukty()).Where(p => !p.isDel).ToList();
+            var produkty = (await _dbService.GetProdukty()).Where(p => !p.isDel).OrderBy(p => p.ToString()).ToList();
             var transakcje = await _dbService.GetTransakcje();
             var dokumenty = await _dbService.GetDokumenty();
 
@@ -93,6 +93,47 @@ namespace InventoryManagment.Views
                     RowSpacing = 0,
                     ColumnSpacing = 1
                 };
+                VisualStateManager.SetVisualStateGroups(grid, new VisualStateGroupList
+        {
+            new VisualStateGroup
+            {
+                States =
+                {
+                    new VisualState
+                    {
+                        Name = "Normal",
+                        Setters =
+                        {
+                            new Setter
+                            {
+                                Property = Grid.BackgroundColorProperty,
+                                Value = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0")
+                            }
+                        }
+                    },
+                    new VisualState
+                    {
+                        Name = "PointerOver",
+                        Setters =
+                        {
+                            new Setter
+                            {
+                                Property = Grid.BackgroundColorProperty,
+                                Value = Color.FromArgb("#e0e0ff") // Highlight color on hover
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
+                // Dodanie obsługi kliknięcia
+                var tapGesture = new TapGestureRecognizer();
+                tapGesture.Tapped += async (s, e) =>
+                {
+                    await Navigation.PushAsync(new TransactionForProductPage(item.Produkt.Id));
+                };
+                grid.GestureRecognizers.Add(tapGesture);
 
                 // Nazwa produktu
                 var nameLabel = new Label
@@ -142,7 +183,7 @@ namespace InventoryManagment.Views
         private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = e.NewTextValue?.ToLower() ?? "";
-            var filtered = _productWithStock.Where(p => p.Produkt.Rozmiar.ToLower().Contains(searchText)).ToList();
+            var filtered = _productWithStock.Where(p => p.Produkt.ToString().ToLower().Contains(searchText)).ToList();
             RenderProductList(filtered);
         }
 

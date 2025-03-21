@@ -4,6 +4,10 @@
     <StackLayout Padding="20" Spacing="15">
         <Label Text="Dodaj/Edytuj Transakcję" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
 
+        <Grid ColumnDefinitions="*, 5*,3*" Padding="5">
+            <Label Text="Produkt: " FontSize="14" Grid.Column="0" Margin="6,0,0,0"/>
+            <Label x:Name="NazwaProduktu" FontSize="14" Grid.Column="1" HorizontalTextAlignment="Start"/>
+        </Grid>
         <Entry x:Name="DostawcaEntry" Placeholder="Dostawca" />
         <Entry x:Name="IloscEntry" Placeholder="Ilość" Keyboard="Numeric"/>
         <Editor x:Name="NotatkaEditor" Placeholder="Notatka" AutoSize="TextChanges"/>

@@ -1,59 +1,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InventoryManagment.Views.DocumentListPage">
-    <Grid RowDefinitions="*" ColumnDefinitions="2*, 3*" Padding="20">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *" Padding="20" RowSpacing="0">
+        <!-- Tytuł i przycisk -->
+        <Grid ColumnDefinitions="*, Auto" Row="0" Margin="0,0,0,20">
+            <Label Text="Lista dokumentów" FontSize="24" FontAttributes="Bold" VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Wyszukiwarka -->
+        <SearchBar x:Name="DocumentSearchBar" Placeholder="Wyszukaj dokument..." TextChanged="OnSearchTextChanged" Grid.Row="1" Margin="0,0,0,10"/>
+
+        <!-- Nagłówki tabeli -->
+        <Grid ColumnDefinitions="2*, *, 2*" BackgroundColor="#e0e0e0" Padding="5" Margin="0" Grid.Row="2" HeightRequest="40">
+            <Label Text="Nadawca/Odbiorca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="0"/>
+            <Label Text="Data" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="1"/>
+            <Label Text="Rodzaj dokumentu" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="2"/>
+        </Grid>
+
+
         <!-- Lista dokumentów -->
-        <StackLayout Grid.Column="0" Spacing="10">
-            <Label Text="Lista dokumentów" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <SearchBar x:Name="DocumentSearchBar" Placeholder="Wyszukaj dokument..." TextChanged="OnSearchTextChanged" />
-            <ListView x:Name="DocumentListView" SelectionMode="Single" ItemSelected="OnDocumentSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="5">
-                                <Label Text="{Binding Nr_Dokumentu}" FontSize="18" FontAttributes="Bold" />
-                                <Label Text="{Binding Data_Wystawienia, StringFormat='Data: {0:dd/MM/yyyy}'}" />
-                                <Label Text="{Binding Przeznaczenie, StringFormat='Przeznaczenie: {0}'}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-
-        <!-- Szczegóły dokumentu i transakcji -->
-        <StackLayout Grid.Column="1" Spacing="10">
-            <Label Text="Szczegóły dokumentu" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-
-            <!-- Szczegóły dokumentu w kompaktowym układzie -->
-            <Grid ColumnDefinitions="2*, 2*" RowDefinitions="Auto, Auto">
-                <Label Text="Numer dokumentu:" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
-                <Label x:Name="DocNumberLabel" Grid.Row="1" Grid.Column="0" />
-                <Label Text="Data wystawienia:" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" />
-                <Label x:Name="DocDateLabel" Grid.Row="1" Grid.Column="1" />
-            </Grid>
-            <Grid ColumnDefinitions="2*, 2*" RowDefinitions="Auto, Auto">
-                <Label Text="Przeznaczenie:" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
-                <Label x:Name="DocPurposeLabel" Grid.Row="1" Grid.Column="0" />
-                <Label Text="Typ dokumentu:" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" />
-                <Label x:Name="DocTypeLabel" Grid.Row="1" Grid.Column="1" />
-            </Grid>
-
-            <Label Text="Transakcje" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
-            <ListView x:Name="TransactionListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="5">
-                                <Label Text="{Binding Produkt}" FontSize="16" FontAttributes="Bold" />
-                                <Label Text="{Binding Dostawca, StringFormat='Dostawca: {0}'}" />
-                                <Label Text="{Binding Zmiana_Stanu, StringFormat='Ilość: {0}'}" />
-                                <Label Text="{Binding Notatka, StringFormat='Notatka: {0}'}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-            </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <ScrollView Grid.Row="3" Margin="0" Padding="0" BackgroundColor="Transparent">
+            <VerticalStackLayout x:Name="DocumentRowsStack" Spacing="0" Margin="0">
+                <!-- Dynamiczne wiersze z dokumentami -->
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>
