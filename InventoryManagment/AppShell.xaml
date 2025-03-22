@@ -9,18 +9,6 @@
     Title="InventoryManagment"
     FlyoutBackgroundColor="#003366">
 
-
-    <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               x:Class="MyProject.SimplePopup">
-
-        <VerticalStackLayout>
-            <Label Text="This is a very important message!" />
-        </VerticalStackLayout>
-
-    </toolkit:Popup>
-
     <Shell.FlyoutHeader>
         <StackLayout Padding="50, 20, 0, 20" BackgroundColor="White">
             <Label Text="Helplast Magazyn" 
@@ -28,7 +16,7 @@
                    FontAttributes="Bold"
                    TextColor="#003366"
                    HorizontalOptions="Start" 
-                   VerticalOptions="CenterAndExpand"/>
+                   VerticalOptions="Center"/>
         </StackLayout>
     </Shell.FlyoutHeader>
 
@@ -49,6 +37,13 @@
         <ShellContent ContentTemplate="{DataTemplate views:TransactionsPage}" />
     </FlyoutItem>
 
-    <MenuItem  Text="Eksportuj bazę do Google Drive" 
-          Clicked="OnExportDatabaseClicked"/>
+    <Shell.FlyoutFooter>
+        <Grid Padding="10">
+            <Button Text="Eksportuj bazę do chmury"
+                Clicked="OnExportDatabaseClicked"
+                Margin="10, 5, 10, 5"
+                BackgroundColor="Transparent"
+                TextColor="White"/>
+        </Grid>
+    </Shell.FlyoutFooter>
 </Shell>

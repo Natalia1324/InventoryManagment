@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
+using CommunityToolkit.Maui.Views;
 using InventoryManagment.Data;
 using InventoryManagment.Views;
-using Acr.UserDialogs; // Dodaj ten using, jeśli jeszcze go nie masz
-
 namespace InventoryManagment
 {
     public partial class AppShell : Shell
@@ -24,9 +23,11 @@ namespace InventoryManagment
 
         private async void OnExportDatabaseClicked(object sender, EventArgs e)
         {
+            var popup = new LoadingPopup();
             try
             {
 
+                Application.Current.MainPage.ShowPopup(popup);
                 // Ścieżka do pliku bazy danych
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Inventory_Managment_db.db3");
                 string tempDbPath = Path.Combine(FileSystem.CacheDirectory, "Inventory_Managment_copydb.db3");
@@ -57,6 +58,7 @@ namespace InventoryManagment
             }
             finally
             {
+                popup.Close(); // Zamknij popup
             }
         }
 

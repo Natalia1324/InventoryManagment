@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="InventoryManagment.Views.LoadingPopup">
+
+    <Border Padding="20" BackgroundColor="White"
+           VerticalOptions="Center" HorizontalOptions="Center">
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <ActivityIndicator IsRunning="True" Color="Blue" WidthRequest="50" HeightRequest="50"/>
+            <Label Text="Eksportowanie bazy..." FontSize="16" HorizontalOptions="Center"/>
+        </StackLayout>
+    </Border>
+
+</toolkit:Popup>

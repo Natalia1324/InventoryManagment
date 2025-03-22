@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using InventoryManagment.Data;
-using Microsoft.EntityFrameworkCore;
 using InventoryManagment.Models;
 using InventoryManagment.Views;
 using Microsoft.Maui.Handlers;
@@ -9,7 +8,6 @@ using Microsoft.Maui.LifecycleEvents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml;
 using Windows.Foundation;
-using Acr.UserDialogs;
 using CommunityToolkit.Maui;
 
 namespace InventoryManagment
@@ -23,6 +21,7 @@ namespace InventoryManagment
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
