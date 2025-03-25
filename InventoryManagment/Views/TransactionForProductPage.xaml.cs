@@ -1,6 +1,9 @@
 ﻿using InventoryManagment.Data;
 using InventoryManagment.Models;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace InventoryManagment.Views
@@ -24,14 +27,22 @@ namespace InventoryManagment.Views
             _allTransactions = new List<object>();
 
             BindingContext = this;
-        }
 
+            MauiProgram.OnKeyDown += HandleKeyDown;
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            this.Focus();
             await LoadTransactions();
         }
-
+        private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Escape)
+            {
+                Navigation.PopAsync(); // Powrót do poprzedniej strony
+            }
+        }
         private async Task LoadTransactions()
         {
             var transakcje = await _dbService.GetTransakcje();

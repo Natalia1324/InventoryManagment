@@ -1,7 +1,10 @@
 ﻿using InventoryManagment.Data;
 using InventoryManagment.Models;
 using Microsoft.Maui.Controls;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,13 +20,24 @@ namespace InventoryManagment.Views
             InitializeComponent();
             _document = document;
             _dbService = App.Services.GetRequiredService<LocalDbService>();
+            MauiProgram.OnKeyDown += HandleKeyDown;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             LoadDocumentDetails();
+            this.Focus();
             await LoadTransactions();
+        }
+        private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
+        {
+            Debug.WriteLine($"Key Pressed: {e.Key}");
+
+            if (e.Key == Windows.System.VirtualKey.Escape)
+            {
+                Navigation.PopAsync(); // Powrót do poprzedniej strony
+            }
         }
         private string TypDokumentuToString(string typ)
         {
@@ -63,45 +77,45 @@ namespace InventoryManagment.Views
                 {
                     ColumnDefinitions = new ColumnDefinitionCollection
                     {
-                        new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                        new ColumnDefinition { Width = GridLength.Star },
-                        new ColumnDefinition { Width = GridLength.Star },
-                        new ColumnDefinition { Width = GridLength.Star }
+                        new ColumnDefinition { Width = new Microsoft.Maui.GridLength(2, Microsoft.Maui.GridUnitType.Star) },
+                        new ColumnDefinition { Width = Microsoft.Maui.GridLength.Star },
+                        new ColumnDefinition { Width = Microsoft.Maui.GridLength.Star },
+                        new ColumnDefinition { Width = Microsoft.Maui.GridLength.Star }
                     },
-                    Padding = new Thickness(5,10),
-                    Margin = new Thickness(0,0),
+                    Padding = new Microsoft.Maui.Thickness(5,10),
+                    Margin = new Microsoft.Maui.Thickness(0,0),
                     BackgroundColor = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0")
                 };
 
                 grid.Add(new Label
                 {
                     Text = product != null ? product.ToString() : "Brak produktu",
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalTextAlignment = Microsoft.Maui.TextAlignment.Center,
+                    VerticalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                     FontSize = 14
                 }, 0, 0);
 
                 grid.Add(new Label
                 {
                     Text = transaction.Zmiana_Stanu.ToString(),
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalTextAlignment = Microsoft.Maui.TextAlignment.Center,
+                    VerticalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                     FontSize = 14
                 }, 1, 0);
 
                 grid.Add(new Label
                 {
                     Text = transaction.Dostawca,
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalTextAlignment = Microsoft.Maui.TextAlignment.Center,
+                    VerticalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                     FontSize = 14
                 }, 2, 0);
 
                 grid.Add(new Label
                 {
                     Text = transaction.Notatka,
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
+                    HorizontalTextAlignment = Microsoft.Maui.TextAlignment.Center,
+                    VerticalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                     FontSize = 14
                 }, 3, 0);
 

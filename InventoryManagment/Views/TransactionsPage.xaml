@@ -1,49 +1,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InventoryManagment.Views.TransactionsPage">
-    <Grid RowDefinitions="Auto, *">
-        <Label Grid.Row="0" Text="Lista Transakcji" FontSize="24" FontAttributes="Bold" HeightRequest="50" Margin="20,20,0,0"/>
-        <Grid Grid.Row="1" RowDefinitions="Auto, Auto, *" Padding="20">
 
-            <!-- Wiersz wyszukiwania -->
-            <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5" Grid.Row="0">
-                <Entry Placeholder="Filtruj po produkcie" TextChanged="OnFilterChanged" x:Name="ProductFilter" />
-                <Entry Placeholder="Filtruj po przeznaczeniu" TextChanged="OnFilterChanged" x:Name="DestinationFilter" Grid.Column="1" />
-                <Entry Placeholder="Filtruj po typie dokumentu" TextChanged="OnFilterChanged" x:Name="DocumentTypeFilter" Grid.Column="2" />
-                <Entry Placeholder="Filtruj po dostawcy" TextChanged="OnFilterChanged" x:Name="SupplierFilter" Grid.Column="3" />
-                <Entry Placeholder="Filtruj po dacie (yyyy-mm-dd)" TextChanged="OnFilterChanged" x:Name="DateFilter" Grid.Column="4" />
-                <Entry Placeholder="Filtruj po ilości" TextChanged="OnFilterChanged" x:Name="QuantityFilter" Grid.Column="5" />
-                <Entry Placeholder="Filtruj po notatkach" TextChanged="OnFilterChanged" x:Name="NoteFilter" Grid.Column="6" />
-            </Grid>
+    <Grid RowDefinitions="Auto, Auto, Auto, *" Padding="20" RowSpacing="5">
 
-            <!-- Nagłówki tabeli -->
-            <Grid ColumnDefinitions="*, *, *, *, *, *, *" BackgroundColor="LightGray" Padding="5" Grid.Row="1">
-                <Label Text="Produkt" FontAttributes="Bold" />
-                <Label Text="Przeznaczenie" FontAttributes="Bold" Grid.Column="1" />
-                <Label Text="Typ Dokumentu" FontAttributes="Bold" Grid.Column="2" />
-                <Label Text="Dostawca" FontAttributes="Bold" Grid.Column="3" />
-                <Label Text="Data Wystawienia" FontAttributes="Bold" Grid.Column="4" />
-                <Label Text="Ilość" FontAttributes="Bold" Grid.Column="5" />
-                <Label Text="Notatka" FontAttributes="Bold" Grid.Column="6" />
-            </Grid>
+        <!-- Nagłówek strony -->
+        <Label Text="Lista transakcji" FontSize="24" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="0" Margin="0,0,0,20"/>
 
-            <CollectionView Grid.Row="2" ItemsSource="{Binding FilteredTransactions}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BorderColor="Gray" CornerRadius="0" Padding="0" Margin="0,0,0,5">
-                            <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5">
-                                <Label Text="{Binding Produkt}" />
-                                <Label Text="{Binding Przeznaczenie}" Grid.Column="1" />
-                                <Label Text="{Binding TypDokumentu}" Grid.Column="2" />
-                                <Label Text="{Binding Dostawca}" Grid.Column="3" />
-                                <Label Text="{Binding DataWystawienia, StringFormat='{0:yyyy-MM-dd}'}" Grid.Column="4" />
-                                <Label Text="{Binding ZmianaStanu}" Grid.Column="5" />
-                                <Label Text="{Binding Notatka}" Grid.Column="6" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <!-- Wyszukiwarki dla każdej kolumny -->
+        <Grid ColumnDefinitions="2*, *, *, *, *, *, *" Padding="5" Grid.Row="1">
+            <Entry Placeholder="Filtruj po produkcie" TextChanged="OnFilterChanged" x:Name="ProductFilter" />
+            <Entry Placeholder="Filtruj po nadawcy/dostawcy" TextChanged="OnFilterChanged" x:Name="DestinationFilter" Grid.Column="1" />
+            <Entry Placeholder="Filtruj po typie" TextChanged="OnFilterChanged" x:Name="DocumentTypeFilter" Grid.Column="2" />
+            <Entry Placeholder="Filtruj po dostawcy" TextChanged="OnFilterChanged" x:Name="SupplierFilter" Grid.Column="3" />
+            <Entry Placeholder="Filtruj po dacie" TextChanged="OnFilterChanged" x:Name="DateFilter" Grid.Column="4" />
+            <Entry Placeholder="Filtruj po ilości" TextChanged="OnFilterChanged" x:Name="QuantityFilter" Grid.Column="5" />
+            <Entry Placeholder="Filtruj po notatkach" TextChanged="OnFilterChanged" x:Name="NoteFilter" Grid.Column="6" />
         </Grid>
+
+        <!-- Nagłówki tabeli -->
+        <Grid ColumnDefinitions="2*, *, *, *, *, *, *" BackgroundColor="#e0e0e0" Padding="10" Margin="0" Grid.Row="2">
+            <Label Text="Produkt" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" />
+            <Label Text="Nadawca/Dostawca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" />
+            <Label Text="Typ dokumentu" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" />
+            <Label Text="Dostawca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="3" />
+            <Label Text="Data" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="4" />
+            <Label Text="Ilość" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="5" />
+            <Label Text="Notatka" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="6" />
+        </Grid>
+
+        <!-- Scrollowalna lista transakcji -->
+        <ScrollView Grid.Row="3" Margin="0" Padding="0" BackgroundColor="Transparent">
+            <VerticalStackLayout x:Name="TransactionRowsStack" Spacing="0" Margin="0">
+                <!-- Dynamiczne wiersze z transakcjami będą dodawane tutaj -->
+            </VerticalStackLayout>
+        </ScrollView>
+
     </Grid>
 </ContentPage>

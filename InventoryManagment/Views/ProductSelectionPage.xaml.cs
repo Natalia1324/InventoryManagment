@@ -1,6 +1,9 @@
 ﻿using InventoryManagment.Data;
 using InventoryManagment.Models;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace InventoryManagment.Views;
 
@@ -15,16 +18,35 @@ public partial class ProductSelectionPage : ContentPage
     {
         InitializeComponent();
         _dbService = new LocalDbService();
+        MauiProgram.OnKeyDown += HandleKeyDown;
     }
-
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        this.Focus(); // Wymuszenie fokusu na stronie
         if (_productWithStock == null || !_productWithStock.Any())
         {
             await LoadProductsAndStock();
         }
     }
+    private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
+    {
+        Debug.WriteLine($"Key Pressed: {e.Key}");
+
+        if (e.Key == Windows.System.VirtualKey.Escape)
+        {
+            Navigation.PopAsync(); // Powrót do poprzedniej strony
+        }
+    }
+
+    //protected override async void OnAppearing()
+    //{
+    //    base.OnAppearing();
+    //    if (_productWithStock == null || !_productWithStock.Any())
+    //    {
+    //        await LoadProductsAndStock();
+    //    }
+    //}
 
     private async Task LoadProductsAndStock()
     {

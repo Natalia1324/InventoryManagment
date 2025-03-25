@@ -22,7 +22,6 @@ namespace InventoryManagment.Views
             InitializeComponent();
             _dbService = App.Services.GetRequiredService<LocalDbService>();
         }
-
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -239,18 +238,59 @@ namespace InventoryManagment.Views
             await Navigation.PushAsync(productSelectionPage);
         }
 
+        private int GetStockChange(Transakcje t, List<Dokumenty> dokumenty)
+        {
+            var dokument = dokumenty.FirstOrDefault(d => d.Id == t.DokumentId);
+            if (dokument == null) return 0;
 
+            return dokument.Typ_Dokumentu switch
+            {
+                TypDokumentu.Przychod_Zewnetrzny => t.Zmiana_Stanu,
+                TypDokumentu.Przychod_Wewnetrzny => t.Zmiana_Stanu,
+                TypDokumentu.Rozchod_Zewnetrzny => -t.Zmiana_Stanu,
+                _ => 0
+            };
+        }
         private async void AddDocument(object sender, EventArgs e)
         {
+            if (_selectedTypDokumentu == TypDokumentu.Rozchod_Zewnetrzny)
+            {
+                var produkty = await _dbService.GetProdukty();
+                var transakcje = await _dbService.GetTransakcje();
+                var dokumenty = await _dbService.GetDokumenty();
+
+                var productStock = produkty.ToDictionary(p => p.Id, p =>
+                    transakcje.Where(t => t.ProduktId == p.Id).Sum(t => GetStockChange(t, dokumenty))
+                );
+
+                List<string> outOfStockProducts = new List<string>();
+
+                foreach (var transakcja in _transactions)
+                {
+                    if (productStock.TryGetValue(transakcja.ProduktId, out int stock) && transakcja.Zmiana_Stanu > stock)
+                    {
+                        var produkt = produkty.FirstOrDefault(p => p.Id == transakcja.ProduktId);
+                        outOfStockProducts.Add(produkt?.ToString() ?? "Nieznany produkt");
+                    }
+                }
+
+                if (outOfStockProducts.Count > 0)
+                {
+                    bool proceed = await DisplayAlert("Uwaga!",
+                        $"Dodanie następujących produktów spowoduje ich ujemny stan magazynowy:\n\n{string.Join("\n", outOfStockProducts)}\n\nCzy chcesz kontynuować?",
+                        "Tak", "Nie");
+
+                    if (!proceed)
+                    {
+                        return; // Anulowanie dodawania dokumentu
+                    }
+                }
+            }
+
             var currentMonth = DataWystawieniaPicker.Date.Month;
             var currentYear = DataWystawieniaPicker.Date.Year;
-
-            // Pobranie liczby dokumentów w bieżącym miesiącu i roku
             var existingDocuments = await _dbService.GetDocumentsForMonth(currentMonth, currentYear);
-            var documentCount = existingDocuments.Count;
-
-            // Wygenerowanie numeru dokumentu
-            var documentNumber = $"{documentCount + 1:D2}/{currentMonth:D2}/{currentYear}";
+            var documentNumber = $"{existingDocuments.Count + 1:D2}/{currentMonth:D2}/{currentYear}";
 
             var dokument = new Dokumenty
             {
@@ -270,8 +310,9 @@ namespace InventoryManagment.Views
 
             await DisplayAlert("Sukces", "Dokument został dodany!", "OK");
             _transactions.Clear();
-            await RefreshTransactionList(); // Dodano
-
+            await RefreshTransactionList();
         }
+
+
     }
 }
