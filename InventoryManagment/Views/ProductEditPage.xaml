@@ -4,6 +4,8 @@
              x:Class="InventoryManagment.Views.ProductEditPage">
     
     <StackLayout Padding="20" Spacing="10">
+        <Label Text="Dodaj/Edytuj produkt:" VerticalOptions="Center" HorizontalOptions="Center" />
+
         <Entry x:Name="RozmiarEntry" Placeholder="Rozmiar" />
         <Entry x:Name="GruboscEntry" Placeholder="Grubość" Keyboard="Numeric" />
         <Entry x:Name="KolorEntry" Placeholder="Kolor" />
@@ -16,7 +18,7 @@
             <CheckBox x:Name="StockExport" IsChecked="False" Grid.Column="0"/>
         </Grid>
 
-        <Button Text="Zapisz" Clicked="OnSaveClicked" BackgroundColor="Green" TextColor="White" />
-        <Button Text="Usuń" Clicked="OnDeleteClicked" BackgroundColor="Red" TextColor="White" IsVisible="False" x:Name="DeleteButton" />
+        <Button Text="Zapisz" Clicked="OnSaveClicked" BackgroundColor="DarkGreen" TextColor="White" />
+        <Button Text="Usuń" Clicked="OnDeleteClicked" BackgroundColor="DarkRed" TextColor="White" IsVisible="False" x:Name="DeleteButton" />
     </StackLayout>
 </ContentPage>

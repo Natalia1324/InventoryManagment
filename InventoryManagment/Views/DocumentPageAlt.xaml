@@ -32,14 +32,14 @@
 
             <!-- Nagłówek sekcji transakcji + przycisk w jednej linii -->
             <Grid ColumnDefinitions="*, Auto" Padding="0,10,0,10">
-                <Label Text="Transakcje" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+                <Label Text="Transakcje" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                 <ImageButton Source="plus.png" Clicked="GoToProductList"
             BackgroundColor="DarkBlue" HeightRequest="20" WidthRequest="20" CornerRadius="20"
             HorizontalOptions="End" />
             </Grid>
 
             <!-- Scrollowalna tabela transakcji -->
-            <ScrollView HorizontalOptions="FillAndExpand">
+            <ScrollView HorizontalOptions="Fill">
                 <Grid x:Name="TransactionsGrid" ColumnSpacing="10" RowSpacing="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />

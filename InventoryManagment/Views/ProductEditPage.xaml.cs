@@ -132,7 +132,7 @@ namespace InventoryManagment.Views
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Błąd podczas zapisu: {ex.Message}");
+                ErrorLogger.LogError($"Błąd przy edycji produktu", ex);
                 await DisplayAlert("Błąd", "Wystąpił problem podczas zapisywania zmian.", "OK");
             }
         }
@@ -186,7 +186,7 @@ namespace InventoryManagment.Views
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Błąd podczas usuwania produktu: {ex.Message}");
+                ErrorLogger.LogError($"Błąd przy usuwaniu produktu", ex);
                 await DisplayAlert("Błąd", "Nie udało się usunąć produktu.", "OK");
             }
         }
