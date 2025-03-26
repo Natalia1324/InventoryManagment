@@ -34,7 +34,15 @@ namespace InventoryManagment.Views
         {
             base.OnAppearing();
             this.Focus();
-            await LoadTransactions();
+            try
+            {
+                await LoadTransactions();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError($"Błąd przy ładowaniu transakcji", ex);
+                await DisplayAlert("Błąd", "Nie udało się pobrać listy transakcji.", "OK");
+            }
         }
         private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
         {
@@ -45,73 +53,105 @@ namespace InventoryManagment.Views
         }
         private async Task LoadTransactions()
         {
-            var transakcje = await _dbService.GetTransakcje();
-            var dokumenty = await _dbService.GetDokumenty();
-            var produkty = await _dbService.GetProdukty();
+            try
+            {
+                var transakcje = await _dbService.GetTransakcje();
+                var dokumenty = await _dbService.GetDokumenty();
+                var produkty = await _dbService.GetProdukty();
 
-            var productTransactions = transakcje
-                .Where(t => t.ProduktId == _productId)
-                .Select(t => new
+                if (transakcje == null || dokumenty == null || produkty == null)
                 {
-                    Produkt = produkty.FirstOrDefault(p => p.Id == t.ProduktId)?.ToString() ?? "Nieznany produkt",
-                    Przeznaczenie = dokumenty.FirstOrDefault(d => d.Id == t.DokumentId)?.Przeznaczenie ?? "",
-                    TypDokumentu = dokumenty.FirstOrDefault(d => d.Id == t.DokumentId)?.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny
-                        ? "Rozchód"
-                        : "Przychód",
-                    Dostawca = t.Dostawca ?? "",
-                    DataWystawienia = dokumenty.FirstOrDefault(d => d.Id == t.DokumentId)?.Data_Wystawienia,
-                    ZmianaStanu = $"{(dokumenty.FirstOrDefault(d => d.Id == t.DokumentId)?.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny
-                        ? "-"
-                        : "+")}{t.Zmiana_Stanu} szt.",
-                    Notatka = t.Notatka ?? "Brak notatki"
-                })
-                .ToList();
+                    throw new Exception("Błąd pobierania danych z bazy");
+                }
 
-            _allTransactions = productTransactions.Cast<object>().ToList();
-            ApplyFilters(); // Początkowe zastosowanie filtrowania (wyświetla wszystkie)
+                var productTransactions = transakcje
+                    .Where(t => t != null && t.ProduktId == _productId)
+                    .Select(t =>
+                    {
+                        var produkt = produkty.FirstOrDefault(p => p?.Id == t?.ProduktId)?.ToString() ?? "Nieznany produkt";
+                        var dokument = dokumenty.FirstOrDefault(d => d?.Id == t?.DokumentId);
+                        var typDokumentu = dokument?.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny ? "Rozchód" : "Przychód";
+                        var zmianaStanu = $"{(dokument?.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny ? "-" : "+")}{t?.Zmiana_Stanu ?? 0} szt.";
+
+                        return new
+                        {
+                            Produkt = produkt,
+                            Przeznaczenie = dokument?.Przeznaczenie ?? "",
+                            TypDokumentu = typDokumentu,
+                            Dostawca = t?.Dostawca ?? "",
+                            DataWystawienia = dokument?.Data_Wystawienia,
+                            ZmianaStanu = zmianaStanu,
+                            Notatka = t?.Notatka ?? "Brak notatki"
+                        };
+                    })
+                    .ToList();
+
+                _allTransactions = productTransactions.Cast<object>().ToList();
+                ApplyFilters(); // Początkowe zastosowanie filtrowania (wyświetla wszystkie)
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd ładowania transakcji: {ex.Message}");
+                await DisplayAlert("Błąd", "Nie udało się pobrać danych o transakcjach.", "OK");
+            }
         }
 
         private void OnFilterChanged(object sender, TextChangedEventArgs e)
         {
-            ApplyFilters();
+            try
+            {
+                ApplyFilters();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd podczas filtrowania: {ex.Message}");
+            }
         }
 
         private void ApplyFilters()
         {
-            string productFilter = ProductFilter.Text?.ToLower() ?? "";
-            string destinationFilter = DestinationFilter.Text?.ToLower() ?? "";
-            string docTypeFilter = DocumentTypeFilter.Text?.ToLower() ?? "";
-            string supplierFilter = SupplierFilter.Text?.ToLower() ?? "";
-            string dateFilter = DateFilter.Text?.ToLower() ?? "";
-            string quantityFilter = QuantityFilter.Text?.ToLower() ?? "";
-            string noteFilter = NoteFilter.Text?.ToLower() ?? "";
-
-            var filtered = _allTransactions.Where(t =>
+            try
             {
-                dynamic trans = t;
+                string productFilter = ProductFilter?.Text?.ToLower() ?? "";
+                string destinationFilter = DestinationFilter?.Text?.ToLower() ?? "";
+                string docTypeFilter = DocumentTypeFilter?.Text?.ToLower() ?? "";
+                string supplierFilter = SupplierFilter?.Text?.ToLower() ?? "";
+                string dateFilter = DateFilter?.Text?.ToLower() ?? "";
+                string quantityFilter = QuantityFilter?.Text?.ToLower() ?? "";
+                string noteFilter = NoteFilter?.Text?.ToLower() ?? "";
 
-                bool matchesProduct = trans.Produkt.ToLower().Contains(productFilter);
-                bool matchesDestination = trans.Przeznaczenie.ToLower().Contains(destinationFilter);
-                bool matchesDocType = trans.TypDokumentu.Contains(docTypeFilter);
-                bool matchesSupplier = trans.Dostawca.ToLower().Contains(supplierFilter);
-                bool matchesDate = trans.DataWystawienia?.ToString("yyyy-MM-dd").ToLower().Contains(dateFilter) ?? false;
-                bool matchesQuantity = trans.ZmianaStanu.ToLower().Contains(quantityFilter);
-                bool matchesNote = trans.Notatka.ToLower().Contains(noteFilter);
+                var filtered = _allTransactions.Where(t =>
+                {
+                    dynamic trans = t;
 
-                return matchesProduct &&
-                       matchesDestination &&
-                       matchesDocType &&
-                       matchesSupplier &&
-                       matchesDate &&
-                       matchesQuantity &&
-                       matchesNote;
-            }).ToList();
+                    bool matchesProduct = trans.Produkt?.ToLower().Contains(productFilter) ?? false;
+                    bool matchesDestination = trans.Przeznaczenie?.ToLower().Contains(destinationFilter) ?? false;
+                    bool matchesDocType = trans.TypDokumentu?.Contains(docTypeFilter) ?? false;
+                    bool matchesSupplier = trans.Dostawca?.ToLower().Contains(supplierFilter) ?? false;
+                    bool matchesDate = trans.DataWystawienia?.ToString("yyyy-MM-dd").ToLower().Contains(dateFilter) ?? false;
+                    bool matchesQuantity = trans.ZmianaStanu?.ToLower().Contains(quantityFilter) ?? false;
+                    bool matchesNote = trans.Notatka?.ToLower().Contains(noteFilter) ?? false;
 
-            FilteredTransactions.Clear();
-            foreach (var item in filtered)
+                    return matchesProduct &&
+                           matchesDestination &&
+                           matchesDocType &&
+                           matchesSupplier &&
+                           matchesDate &&
+                           matchesQuantity &&
+                           matchesNote;
+                }).ToList();
+
+                FilteredTransactions.Clear();
+                foreach (var item in filtered)
+                {
+                    FilteredTransactions.Add(item);
+                }
+            }
+            catch (Exception ex)
             {
-                FilteredTransactions.Add(item);
+                Debug.WriteLine($"Błąd podczas stosowania filtrów: {ex.Message}");
             }
         }
     }
 }
+

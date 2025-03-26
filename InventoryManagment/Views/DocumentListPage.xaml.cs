@@ -22,31 +22,62 @@ namespace InventoryManagment.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await LoadDocuments();
+            try
+            {
+                await LoadDocuments();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Błąd", $"Nie udało się załadować dokumentów: {ex.Message}", "OK");
+            }
         }
 
         private async Task LoadDocuments()
         {
-            _allDocuments = (await _dbService.GetDokumenty())
-                .Where(d => d.Przeznaczenie != "Wyrównanie Stanu Magazynowego")
-                .OrderByDescending(d => d.Data_Wystawienia)
-                .ToList();
+            try
+            {
+                var documents = await _dbService.GetDokumenty();
+                _allDocuments = documents?
+                    .Where(d => d?.Przeznaczenie != "Wyrównanie Stanu Magazynowego")
+                    .OrderByDescending(d => d?.Data_Wystawienia)
+                    .ToList() ?? new List<Dokumenty>();
 
-            RenderDocumentList(_allDocuments);
+                RenderDocumentList(_allDocuments);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Błąd", $"Wystąpił problem podczas pobierania dokumentów: {ex.Message}", "OK");
+                _allDocuments = new List<Dokumenty>();
+            }
         }
-        private string TypDokumentuToString(string typ)
+
+        private string TypDokumentuToString(string? typ)
         {
             return typ switch
             {
                 "Rozchod_Zewnetrzny" => "Rozchód Zewnętrzny",
                 "Przychod_Wewnetrzny" => "Przychód Wewnętrzny",
                 "Przychod_Zewnetrzny" => "Przychód Zewnętrzny",
-                _ => typ // Domyślnie zwraca oryginalną wartość
+                _ => typ ?? "Nieznany typ"
             };
         }
+
         private void RenderDocumentList(List<Dokumenty> documents)
         {
             DocumentRowsStack.Children.Clear();
+
+            if (documents == null || documents.Count == 0)
+            {
+                DocumentRowsStack.Children.Add(new Label
+                {
+                    Text = "Brak dokumentów do wyświetlenia.",
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Center,
+                    FontSize = 16,
+                    TextColor = Colors.Gray
+                });
+                return;
+            }
 
             for (int i = 0; i < documents.Count; i++)
             {
@@ -55,101 +86,45 @@ namespace InventoryManagment.Views
                 var grid = new Grid
                 {
                     ColumnDefinitions = new ColumnDefinitionCollection
-            {
-                new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }, // Zgodne z nagłówkami
-                new ColumnDefinition { Width = GridLength.Star }, // Zgodne z nagłówkami
-                new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) } // Zgodne z nagłówkami
-            },
+                    {
+                        new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+                        new ColumnDefinition { Width = GridLength.Star },
+                        new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) }
+                    },
                     Padding = new Thickness(5, 2),
                     BackgroundColor = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0"),
                     RowSpacing = 0,
                     ColumnSpacing = 1,
-                    HeightRequest = 40 // Ustawienie takiej samej wysokości jak nagłówki
+                    HeightRequest = 40
                 };
-
-                // Hover effect
-                VisualStateManager.SetVisualStateGroups(grid, new VisualStateGroupList
-                {
-                    new VisualStateGroup
-                    {
-                        States =
-                        {
-                            new VisualState
-                            {
-                                Name = "Normal",
-                                Setters =
-                                {
-                                    new Setter
-                                    {
-                                        Property = Grid.BackgroundColorProperty,
-                                        Value = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0")
-                                    }
-                                }
-                            },
-                            new VisualState
-                            {
-                                Name = "PointerOver",
-                                Setters =
-                                {
-                                    new Setter
-                                    {
-                                        Property = Grid.BackgroundColorProperty,
-                                        Value = Color.FromArgb("#e0e0ff")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
 
                 var tapGesture = new TapGestureRecognizer();
                 tapGesture.Tapped += async (s, e) => await ShowDocumentDetails(doc);
                 grid.GestureRecognizers.Add(tapGesture);
 
-                // Nr dokumentu
-                var nrLabel = new Label
+                grid.Add(new Label
                 {
                     Text = string.IsNullOrWhiteSpace(doc.Przeznaczenie) ? "-" : doc.Przeznaczenie,
                     HorizontalTextAlignment = TextAlignment.Center,
                     VerticalTextAlignment = TextAlignment.Center,
                     FontSize = 14
-                };
-                grid.Add(nrLabel, 0, 0);
+                }, 0, 0);
 
-                // Data
-                var dateLabel = new Label
+                grid.Add(new Label
                 {
                     Text = doc.Data_Wystawienia.ToString("dd/MM/yyyy"),
                     HorizontalTextAlignment = TextAlignment.Center,
                     VerticalTextAlignment = TextAlignment.Center,
                     FontSize = 14
-                };
-                grid.Add(dateLabel, 1, 0);
+                }, 1, 0);
 
-                var typLabel = new Label
+                grid.Add(new Label
                 {
                     Text = TypDokumentuToString(doc.Typ_Dokumentu.ToString()),
                     HorizontalTextAlignment = TextAlignment.Center,
                     VerticalTextAlignment = TextAlignment.Center,
                     FontSize = 14
-                };
-                grid.Add(typLabel, 2, 0);
-                // Szczegóły button
-                //var detailButton = new ImageButton
-                //{
-                //    Source = "details.png",
-                //    BackgroundColor = Colors.SteelBlue,
-                //    CornerRadius = 5,
-                //    Padding = new Thickness(10, 5),
-                //    Margin = new Thickness(0, 0, 30, 0),
-                //    HorizontalOptions = LayoutOptions.Center,
-                //    WidthRequest = 50,
-                //    HeightRequest = 40
-                //};
-
-                // detailButton.Clicked += async (s, e) => await ShowDocumentDetails(doc);
-
-                //grid.Add(detailButton, 2, 0);
+                }, 2, 0);
 
                 DocumentRowsStack.Children.Add(grid);
             }
@@ -160,9 +135,9 @@ namespace InventoryManagment.Views
             var searchText = e.NewTextValue?.ToLower() ?? "";
             var filtered = _allDocuments
                 .Where(doc =>
-                    doc.Nr_Dokumentu.ToLower().Contains(searchText) ||
+                    doc.Nr_Dokumentu?.ToLower().Contains(searchText) == true ||
                     doc.Data_Wystawienia.ToString("dd/MM/yyyy").Contains(searchText) ||
-                    doc.Przeznaczenie.ToLower().Contains(searchText))
+                    doc.Przeznaczenie?.ToLower().Contains(searchText) == true)
                 .ToList();
 
             RenderDocumentList(filtered);
@@ -170,7 +145,20 @@ namespace InventoryManagment.Views
 
         private async Task ShowDocumentDetails(Dokumenty doc)
         {
-            await Navigation.PushAsync(new DocumentDetailsPage(doc)); // Musisz mieć stronę do szczegółów
+            try
+            {
+                if (doc == null)
+                {
+                    await DisplayAlert("Błąd", "Nie można otworzyć szczegółów, ponieważ dokument nie istnieje.", "OK");
+                    return;
+                }
+
+                await Navigation.PushAsync(new DocumentDetailsPage(doc));
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Błąd", $"Nie udało się otworzyć szczegółów dokumentu: {ex.Message}", "OK");
+            }
         }
     }
 }

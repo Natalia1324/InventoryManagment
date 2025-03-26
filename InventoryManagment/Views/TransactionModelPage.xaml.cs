@@ -2,6 +2,7 @@
 using InventoryManagment.Models;
 using System;
 using InventoryManagment.Data;
+using System.Diagnostics;
 
 namespace InventoryManagment.Views
 {
@@ -24,31 +25,59 @@ namespace InventoryManagment.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            try
+            {
+                var produkt = await _dbService.GetProduktById(_transaction.ProduktId);
 
-            var produkt = await _dbService.GetProduktById(_transaction.ProduktId);
-
-            NazwaProduktu.Text = produkt.ToString();
-            // Wypełnij UI danymi transakcji
-            DostawcaEntry.Text = _transaction.Dostawca;
-            IloscEntry.Text = _transaction.Zmiana_Stanu != 0 ? _transaction.Zmiana_Stanu.ToString() : string.Empty;
-            NotatkaEditor.Text = _transaction.Notatka;
+                NazwaProduktu.Text = produkt?.ToString();
+                // Wypełnij UI danymi transakcji
+                DostawcaEntry.Text = _transaction.Dostawca;
+                IloscEntry.Text = _transaction.Zmiana_Stanu != 0 ? _transaction.Zmiana_Stanu.ToString() : string.Empty;
+                NotatkaEditor.Text = _transaction.Notatka;
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Błąd ładowania strony", ex);
+                await DisplayAlert("Błąd", "Nie udało się załadować strony.", "OK");
+            }
         }
 
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            _transaction.Dostawca = DostawcaEntry.Text;
-            _transaction.Zmiana_Stanu = int.TryParse(IloscEntry.Text, out var ilosc) ? ilosc : 0;
-            _transaction.Notatka = NotatkaEditor.Text;
+            try
+            {
+                if (_transaction == null)
+                {
+                    throw new Exception("Brak transakcji do zapisania.");
+                }
 
-            IsSaved = true; // Flaga zapisania
-            await Navigation.PopModalAsync();
+                _transaction.Dostawca = DostawcaEntry?.Text ?? string.Empty;
+                _transaction.Zmiana_Stanu = int.TryParse(IloscEntry?.Text, out var ilosc) ? ilosc : 0;
+                _transaction.Notatka = NotatkaEditor?.Text ?? string.Empty;
+
+                IsSaved = true; // Flaga zapisania
+                await Navigation.PopModalAsync();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError($"Błąd przy filtrowaniu transakcji", ex);
+                await DisplayAlert("Błąd", "Nie udało się zapisać transakcji.", "OK");
+            }
         }
 
         private async void OnCancelClicked(object sender, EventArgs e)
         {
-            IsSaved = false; // Anulowano
-            await Navigation.PopModalAsync();
+            try
+            {
+                IsSaved = false; // Anulowano
+                await Navigation.PopModalAsync();
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError($"Błąd przy filtrowaniu transakcji", ex);
+                await DisplayAlert("Błąd", "Nie udało się zamknąć okna.", "OK");
+            }
         }
     }
 }

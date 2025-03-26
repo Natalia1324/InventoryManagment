@@ -24,9 +24,17 @@ public partial class ProductSelectionPage : ContentPage
     {
         base.OnAppearing();
         this.Focus(); // Wymuszenie fokusu na stronie
-        if (_productWithStock == null || !_productWithStock.Any())
+        try
         {
-            await LoadProductsAndStock();
+            if (_productWithStock == null || !_productWithStock.Any())
+            {
+                await LoadProductsAndStock();
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorLogger.LogError($"Błąd przy wyborze produktu", ex);
+            await DisplayAlert("Błąd", "Nie udało się załadować listy produktów.", "OK");
         }
     }
     private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
@@ -39,46 +47,62 @@ public partial class ProductSelectionPage : ContentPage
         }
     }
 
-    //protected override async void OnAppearing()
-    //{
-    //    base.OnAppearing();
-    //    if (_productWithStock == null || !_productWithStock.Any())
-    //    {
-    //        await LoadProductsAndStock();
-    //    }
-    //}
 
     private async Task LoadProductsAndStock()
     {
-        var produkty = (await _dbService.GetProdukty()).Where(p => !p.isDel).ToList();
+        var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).OrderBy(p => p.ToString()).ToList();
         var transakcje = await _dbService.GetTransakcje();
         var dokumenty = await _dbService.GetDokumenty();
 
-        _productWithStock = produkty.Select(p => new ProductWithStock
+        if (produkty != null && transakcje != null && dokumenty != null)
         {
-            Produkt = p,
-            Stock = transakcje.Where(t => t.ProduktId == p.Id)
-                              .Sum(t => GetStockChange(t, dokumenty))
-        }).ToList();
+            _productWithStock = produkty.Select(p => new ProductWithStock
+            {
+                Produkt = p,
+                Stock = transakcje.Where(t => t.ProduktId == p.Id)
+                                  .Sum(t => GetStockChange(t, dokumenty))
+            }).ToList();
 
-        ProductListView.ItemsSource = _productWithStock;
+            ProductListView.ItemsSource = _productWithStock;
+        }
+        else throw new Exception("Product Managment: Błąd pobierania bazy danych");
 
     }
-    private int GetStockChange(Transakcje transakcja, List<Dokumenty> dokumenty)
+    private static int GetStockChange(Transakcje t, List<Dokumenty>? dokumenty)
     {
-        var dokument = dokumenty.FirstOrDefault(d => d.Id == transakcja.DokumentId);
-        if (dokument == null) return 0;
+        try
+        {
+            var dokument = dokumenty?.FirstOrDefault(d => d?.Id == t?.DokumentId);
+            if (dokument == null) return 0;
 
-        // Zakładając, że dokumenty mają typ określający, czy dodają, czy odejmują ze stanu magazynowego
-        return dokument.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny ? -transakcja.Zmiana_Stanu : transakcja.Zmiana_Stanu;
+            return dokument.Typ_Dokumentu switch
+            {
+                TypDokumentu.Przychod_Zewnetrzny => t.Zmiana_Stanu,
+                TypDokumentu.Przychod_Wewnetrzny => t.Zmiana_Stanu,
+                TypDokumentu.Rozchod_Zewnetrzny => -t.Zmiana_Stanu,
+                _ => 0
+            };
+        }
+        catch (Exception ex)
+        {
+            ErrorLogger.LogError("Problem z pobieraniem stanów magazynowych", ex);
+        }
+        return 0;
     }
 
     private void OnProductTapped(object sender, ItemTappedEventArgs e)
     {
-        if (e.Item is ProductWithStock selectedProduct)
+        try
         {
-            ProductSelected?.Invoke(this, selectedProduct.Produkt);
-            //Navigation.PopAsync();
+            if (e?.Item is ProductWithStock selectedProduct && selectedProduct.Produkt != null)
+            {
+                ProductSelected?.Invoke(this, selectedProduct.Produkt);
+                // Navigation.PopAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorLogger.LogError($"Błąd przy wyborze produktu", ex);
         }
     }
 
@@ -86,17 +110,22 @@ public partial class ProductSelectionPage : ContentPage
 
     private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
-        var searchText = e.NewTextValue?.ToLower() ?? string.Empty;
+        try
+        {
+            var searchText = e.NewTextValue?.ToLower() ?? string.Empty;
 
-        if (!string.IsNullOrEmpty(searchText))
-        {
-            ProductListView.ItemsSource = _productWithStock
-                .Where(p => p.Produkt.ToString().ToLower().Contains(searchText))
-                .ToList();  // Konwersja do nowej listy zapobiega zapętleniu
+            if (_productWithStock == null)
+                return;
+
+            ProductListView.ItemsSource = string.IsNullOrEmpty(searchText)
+                ? _productWithStock
+                : _productWithStock
+                    .Where(p => p.Produkt != null && p.Produkt.ToString().ToLower().Contains(searchText))
+                    .ToList();
         }
-        else
+        catch (Exception ex)
         {
-            ProductListView.ItemsSource = _productWithStock;  // Przywrócenie pełnej listy
+            ErrorLogger.LogError("ProductSelection: Błąd filtrowania", ex);
         }
     }
 

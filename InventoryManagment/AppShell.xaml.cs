@@ -53,7 +53,7 @@ namespace InventoryManagment
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[Export Error] {ex.Message}");
+                ErrorLogger.LogError($"Błąd przy dodawaniu bazy danych", ex);
                 await DisplayAlert("Błąd", "Nie udało się wyeksportować bazy.", "OK");
             }
             finally

@@ -17,9 +17,16 @@ namespace InventoryManagment.Data
 
         public void Login()
         {
-            LoadCredentials();
-            _client.Login(_email, _password);
-            Console.WriteLine("Logged in to MEGA as " + _email);
+            try
+            {
+                LoadCredentials();
+                _client.Login(_email, _password);
+                Console.WriteLine("Logged in to MEGA as " + _email);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Problem z logowaniem do MEGA", ex);
+            }
         }
 
         private void LoadCredentials()
@@ -35,37 +42,45 @@ namespace InventoryManagment.Data
 
         public void UploadFile(string localFilePath)
         {
-            string todayFolderName = DateTime.Now.ToString("yyyy-MM-dd");
-
-            // Pobierz wszystkie foldery w root
-            var nodes = _client.GetNodes();
-            var root = nodes.Single(n => n.Type == NodeType.Root);
-
-            // Szukaj folderu z dzisiejszą datą
-            var dateFolder = nodes
-                .Where(n => n.Type == NodeType.Directory && n.ParentId == root.Id)
-                .FirstOrDefault(n => n.Name == todayFolderName);
-
-            // Jeśli folder nie istnieje – utwórz go
-            if (dateFolder == null)
+            try
             {
-                dateFolder = _client.CreateFolder(todayFolderName, root);
-                Console.WriteLine($"Created folder: {todayFolderName}");
+                string todayFolderName = DateTime.Now.ToString("yyyy-MM-dd");
+
+                // Pobierz wszystkie foldery w root
+                var nodes = _client.GetNodes();
+                var root = nodes.Single(n => n.Type == NodeType.Root);
+
+                // Szukaj folderu z dzisiejszą datą
+                var dateFolder = nodes
+                    .Where(n => n.Type == NodeType.Directory && n.ParentId == root.Id)
+                    .FirstOrDefault(n => n.Name == todayFolderName);
+
+                // Jeśli folder nie istnieje – utwórz go
+                if (dateFolder == null)
+                {
+                    dateFolder = _client.CreateFolder(todayFolderName, root);
+                }
+
+                // Upload pliku do folderu z dzisiejszą datą
+                var uploadedNode = _client.UploadFile(localFilePath, dateFolder);
+                var link = _client.GetDownloadLink(uploadedNode);
             }
-
-            // Upload pliku do folderu z dzisiejszą datą
-            var uploadedNode = _client.UploadFile(localFilePath, dateFolder);
-            var link = _client.GetDownloadLink(uploadedNode);
-
-            Console.WriteLine($"File uploaded to '{todayFolderName}': {uploadedNode.Name}");
-            Console.WriteLine($"Download link: {link}");
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Problem z wrzucaniem pliku do MEGA", ex);
+            }
         }
 
 
         public void Logout()
         {
+            try { 
             _client.Logout();
-            Console.WriteLine("Logged out of MEGA");
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Problem z wylogowaniem z MEGA", ex);
+            }
         }
     }
 }
