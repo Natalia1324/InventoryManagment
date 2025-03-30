@@ -1,0 +1,37 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.ConsumptionSummaryPage">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, *" Padding="20" RowSpacing="10">
+
+        <!-- Dynamiczny nagłówek -->
+        <Label x:Name="HeaderLabel" FontSize="24" FontAttributes="Bold" VerticalOptions="Center" Grid.Row="0"/>
+
+        <!-- Filtr zakresu dat -->
+        <Grid ColumnDefinitions="*, *, *, *, *" Grid.Row="1" Margin="0,10,0,10">
+            <Label Text="Od: " Grid.Column="0" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+            <DatePicker x:Name="StartDatePicker" Date="{Binding StartDate}" Format="dd/MM/yyyy" Grid.Column="1"/>
+            <Label Text="Do: " Grid.Column="2" HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+            <DatePicker x:Name="EndDatePicker" Date="{Binding EndDate}" Grid.Column="3" Format="dd/MM/yyyy" />
+            <Button Text="Filtruj" Clicked="OnFilterClicked" BackgroundColor="DarkBlue" TextColor="White" Grid.Column="4" HorizontalOptions="End"/>
+
+        </Grid>
+
+        <!-- Przycisk filtrowania -->
+
+        <!-- Nagłówki tabeli -->
+        <Grid ColumnDefinitions="2*, *, Auto" BackgroundColor="#e0e0e0" Padding="5" Grid.Row="3">
+            <Label Text="Data" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" />
+            <Label Text="Ilość" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" />
+        </Grid>
+
+        <!-- Scrollowalna lista wyników -->
+        <ScrollView Grid.Row="4" BackgroundColor="Transparent">
+            <VerticalStackLayout x:Name="ConsumptionRowsStack" Spacing="0" Margin="0"/>
+        </ScrollView>
+        
+        <!-- Podsumowanie ilości -->
+        <Label x:Name="TotalConsumptionLabel" Text="Suma rozchodów: -" FontSize="14" FontAttributes="Bold"
+               HorizontalOptions="Center" Grid.Row="5" Margin="0,10,0,10"/>
+    </Grid>
+</ContentPage>

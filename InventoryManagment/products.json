@@ -234,6 +234,14 @@
   },
   {
     "Rozmiar": "120L",
+    "Grubosc": 0.03,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
     "Grubosc": null,
     "Kolor": "CZERWONE",
     "Ilosc_Paczka": 25,
@@ -339,11 +347,717 @@
   {
     "Rozmiar": "120L",
     "Grubosc": null,
+    "Kolor": "NIEBIESKIE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "SANDOMIERZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "NIEBIESKIE NADRUK",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "TUSZYN",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "POMARAŃCZOWE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.05,
+    "Kolor": "SPOŻYWCZE",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "SPOŻYWCZE",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.033,
     "Kolor": "ZIELONE",
     "Ilosc_Paczka": 25,
     "Przeznaczenie": "GLIWICE",
     "Opis": ""
   },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.025,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "ZIELONE",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "ZIELONE NADRUK",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "TUSZYN",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "Żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "Żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "Żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": 0.03,
+    "Kolor": "Żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "Żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "120L",
+    "Grubosc": null,
+    "Kolor": "Żółte nadruk",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "Tuszyn",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "130/130",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "witos",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "witos",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": 0.03,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Ochojec",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "witos",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": 0.028,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Ochojec",
+    "Opis": ""
+  },
+  //begin
+
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "WITOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "GR.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "ONKOLOGIA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.05,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "SŁUPSK",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "OLESNO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.04,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR. PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.04,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "podw.zgrz.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.05,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "WITOS",
+    "Opis": ""
+  },
+  //end
+  //begin
+
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.04,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR. PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.05,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PODW. ZGRZEW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.033,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "OPOLE MSW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.04,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "OLESNO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.04,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "BARLICKI",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": 0.05,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "SŁUPSK",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "160L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  //end
+  //begin
+  {
+    "Rozmiar": "20L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": 0.035,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Ochojec",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": 0.05,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNOBRZEG",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "240L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "ONKOLOGIA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 15,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
+  {
+    "Rozmiar": "140L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "witos",
+    "Opis": ""
+  },
+  //begin
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "35L",
     "Grubosc": null,
@@ -368,6 +1082,128 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "KNURÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": 0.01,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD 10MIC",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "T.SZCZEKLIKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "T.SZCZEKLIKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "35L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": 0.025,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "50/60",
     "Grubosc": 0.028,
@@ -376,6 +1212,64 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "NYSA ZGRZEW X 2",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": 0.025,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": null,
+    "Kolor": "spożywcze",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/60",
+    "Grubosc": 0.025,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "50/70",
     "Grubosc": null,
@@ -401,6 +1295,38 @@
     "Opis": ""
   },
   {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/70",
+    "Grubosc": null,
+    "Kolor": "spożywcze",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "50/80",
+    "Grubosc": null,
+    "Kolor": "spożywcze",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "55/60",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Tarnów",
+    "Opis": ""
+  },
+  {
     "Rozmiar": "55/80",
     "Grubosc": 0.04,
     "Kolor": "czerwone",
@@ -408,6 +1334,128 @@
     "Przeznaczenie": "Tarnów",
     "Opis": ""
   },
+  {
+    "Rozmiar": "55/80",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "Tarnów",
+    "Opis": ""
+  },
+  //begin
+  {
+    "Rozmiar": "60/60",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "JURASZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "JURASZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.028,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR. PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.028,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR. PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.028,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR. PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/80",
+    "Grubosc": 0.035,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "60/80",
     "Grubosc": 0.035,
@@ -429,9 +1477,163 @@
     "Grubosc": null,
     "Kolor": "BIAŁE",
     "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "BIAŁE",
+    "Ilosc_Paczka": 50,
     "Przeznaczenie": "MIKULICZ",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "OPOLE MIDZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "MIKULICZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "MIKULICZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "MIKULICZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60/90",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "MIKULICZ",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": 0.028,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "Ochojec",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -440,6 +1642,64 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 15,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": 0.028,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -448,6 +1708,330 @@
     "Przeznaczenie": "OLESNO",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 30,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 15,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "HAJNÓWKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": 0.025,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": 0.028,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "GŁOGÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "OLESNO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD (7MIC)",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 30,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 20,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "HAJNÓWKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  //end
+  //begin
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "spożywcze",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "LATOS",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "HD",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "60L",
+    "Grubosc": 0.028,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "7/31",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 100,
+    "Przeznaczenie": "FRANCUSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.035,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "70/110",
     "Grubosc": 0.04,
@@ -456,6 +2040,234 @@
     "Przeznaczenie": "TARNÓW SZ.",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.05,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.035,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW SZ.",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.035,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": 0.04,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/110",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "BRZOZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/115",
+    "Grubosc": 0.04,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/115",
+    "Grubosc": 0.025,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/115",
+    "Grubosc": 0.05,
+    "Kolor": "pomarańczowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/120",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/120",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/120",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/120",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/120",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "WR.PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/130",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PIOTRKÓW",
+    "Opis": ""
+  },
+  //end
+  //begin
+  {
+    "Rozmiar": "70/60",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "JASŁO",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/70",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/70",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/70",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/85",
+    "Grubosc": null,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "TARNÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "70/85",
+    "Grubosc": null,
+    "Kolor": "przeźroczyste",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "TARNÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/100",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/110",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/110",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "80/120",
     "Grubosc": 0.03,
@@ -464,6 +2276,72 @@
     "Przeznaczenie": "JONSCHERA",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "80/120",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "JURASZÓW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/140",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "80/90",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "brązowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "granatowe",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/110",
+    "Grubosc": 0.035,
+    "Kolor": "szare",
+    "Ilosc_Paczka": 50,
+    "Przeznaczenie": "POMORSKA",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "80/160",
     "Grubosc": null,
@@ -482,12 +2360,78 @@
   },
   {
     "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "bezbarwne",
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "Rzeszów",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "białe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
     "Grubosc": 0.033,
     "Kolor": "BIAŁE",
     "Ilosc_Paczka": 10,
     "Przeznaczenie": "NYSA",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": 0.035,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": 0.06,
+    "Kolor": "fioletowe",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "GLIWICE",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/120",
+    "Grubosc": null,
+    "Kolor": "zielone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "90/130",
     "Grubosc": 0.04,
@@ -496,8 +2440,122 @@
     "Przeznaczenie": "PIOTRKÓW",
     "Opis": ""
   },
+  //begin
+  {
+    "Rozmiar": "90/140",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/140",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/140",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 25,
+    "Przeznaczenie": "OPOLE MSW",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/140",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": null,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": 0.028,
+    "Kolor": "czarne",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": null,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": 0.028,
+    "Kolor": "czerwone",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PŁUCNY",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": null,
+    "Kolor": "niebieskie",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": null,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "90/90",
+    "Grubosc": 0.028,
+    "Kolor": "żółte",
+    "Ilosc_Paczka": 10,
+    "Przeznaczenie": "PŁUCNY",
+    "Opis": ""
+  },
+  //end
   {
     "Rozmiar": "Fartuchy",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Papierowe 50/70/3",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Papierowe 60/100/2",
+    "Grubosc": null,
+    "Kolor": null,
+    "Ilosc_Paczka": null,
+    "Przeznaczenie": "",
+    "Opis": ""
+  },
+  {
+    "Rozmiar": "Śliniaki",
     "Grubosc": null,
     "Kolor": null,
     "Ilosc_Paczka": null,
