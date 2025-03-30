@@ -6,7 +6,7 @@
         <!-- Tytuł i przycisk -->
         <Grid ColumnDefinitions="*, Auto" Row="0" Margin="0,0,0,20">
             <Label Text="Lista produktów" FontSize="24" FontAttributes="Bold" VerticalOptions="Center"  />
-            <Button Text="Dodaj produkt" BackgroundColor="#003366" Clicked="OnAddProductClicked" Grid.Column="1" />
+            <Button Text="Dodaj produkt" BackgroundColor="DarkBlue" Clicked="OnAddProductClicked" Grid.Column="1" />
         </Grid>
 
         <!-- Wyszukiwarka -->

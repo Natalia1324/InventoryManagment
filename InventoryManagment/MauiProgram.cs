@@ -9,7 +9,6 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml;
 using Windows.Foundation;
 using CommunityToolkit.Maui;
-
 namespace InventoryManagment
 {
     public static class MauiProgram
@@ -49,6 +48,8 @@ namespace InventoryManagment
                     });
                 });
             });
+
+
             builder.Services.AddSingleton<LocalDbService>();
             //builder.Services.AddTransient<DocumentPageAlt>();
             //builder.Services.AddTransient<DocumentListPage>();

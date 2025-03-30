@@ -156,6 +156,7 @@ namespace InventoryManagment.Views
                     tapGesture.Tapped += async (s, e) =>
                     {
                         await Navigation.PushAsync(new TransactionForProductPage(item.Produkt.Id));
+
                     };
                     grid.GestureRecognizers.Add(tapGesture);
 

@@ -11,23 +11,21 @@ namespace InventoryManagment.Views
     public partial class TransactionForProductPage : ContentPage
     {
         private readonly LocalDbService _dbService;
-        private int _productId;
 
         private List<object> _allTransactions; // Przechowuje wszystkie transakcje do filtrowania
-
+        private int _productId;
         public ObservableCollection<object> FilteredTransactions { get; set; }
 
         public TransactionForProductPage(int productId)
         {
             InitializeComponent();
             _dbService = App.Services.GetRequiredService<LocalDbService>();
-            _productId = productId;
 
             FilteredTransactions = new ObservableCollection<object>();
             _allTransactions = new List<object>();
 
             BindingContext = this;
-
+            _productId = productId;
             MauiProgram.OnKeyDown += HandleKeyDown;
         }
         protected override async void OnAppearing()
@@ -48,7 +46,7 @@ namespace InventoryManagment.Views
         {
             if (e.Key == Windows.System.VirtualKey.Escape)
             {
-                Navigation.PopAsync(); // Powrót do poprzedniej strony
+                Navigation.PopAsync();
             }
         }
         private async Task LoadTransactions()
@@ -152,6 +150,20 @@ namespace InventoryManagment.Views
                 Debug.WriteLine($"Błąd podczas stosowania filtrów: {ex.Message}");
             }
         }
+        private async void OnViewSummaryClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // Navigate to the ConsumptionSummaryPage with the current ProductId
+                await Navigation.PushAsync(new ConsumptionSummaryPage(_productId));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Błąd podczas nawigacji: {ex.Message}");
+                await DisplayAlert("Błąd", "Nie udało się przejść do podsumowania rozchodów.", "OK");
+            }
+        }
+
     }
 }
 
