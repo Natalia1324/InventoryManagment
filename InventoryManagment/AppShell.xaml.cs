@@ -31,7 +31,8 @@ namespace InventoryManagment
                 // Ścieżka do pliku bazy danych
                 string dbPath = Path.Combine(FileSystem.AppDataDirectory, "Inventory_Managment_db.db3");
                 string tempDbPath = Path.Combine(FileSystem.CacheDirectory, "Inventory_Managment_copydb.db3");
-
+                ErrorLogger.LogError($"{Path.Combine(FileSystem.AppDataDirectory, "Inventory_Managment_db.db3")}", new Exception(""));
+                Debug.WriteLine($"{Path.Combine(FileSystem.AppDataDirectory, "Inventory_Managment_db.db3")}");
                 File.Copy(dbPath, tempDbPath, overwrite: true);
 
                 if (!File.Exists(tempDbPath))
