@@ -30,7 +30,7 @@ namespace InventoryManagment.Data
 
                 if (await _connection.Table<Produkty>().CountAsync() == 0)
                 {
-                    await ImportProductsFromJson(Path.Combine(AppContext.BaseDirectory, "products.json"));
+                    await ImportProductsFromJson(Path.Combine(FileSystem.AppDataDirectory, "products.json"));
                 }
             }
             catch (Exception ex)
