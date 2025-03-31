@@ -97,6 +97,40 @@ namespace InventoryManagment.Views
                     ColumnSpacing = 1,
                     HeightRequest = 40
                 };
+                VisualStateManager.SetVisualStateGroups(grid, new VisualStateGroupList
+        {
+            new VisualStateGroup
+            {
+                States =
+                {
+                    new VisualState
+                    {
+                        Name = "Normal",
+                        Setters =
+                        {
+                            new Setter
+                            {
+                                Property = Grid.BackgroundColorProperty,
+                                Value = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0")
+                            }
+                        }
+                    },
+                    new VisualState
+                    {
+                        Name = "PointerOver",
+                        Setters =
+                        {
+                            new Setter
+                            {
+                                Property = Grid.BackgroundColorProperty,
+                                Value = Color.FromArgb("#e0e0ff") // Highlight color on hover
+                            }
+
+                        }
+                    }
+                }
+            }
+        });
 
                 var tapGesture = new TapGestureRecognizer();
                 tapGesture.Tapped += async (s, e) => await ShowDocumentDetails(doc);

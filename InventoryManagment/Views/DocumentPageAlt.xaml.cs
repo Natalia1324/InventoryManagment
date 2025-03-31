@@ -327,11 +327,8 @@ namespace InventoryManagment.Views
             }
             catch (Exception ex)
             {
-                ErrorLogger.LogError("Problem z dodaniem dokumentu", ex);
-            }
-            finally
-            {
                 await DisplayAlert("Problem!", "Dokument nie został dodany :c", "OK");
+                ErrorLogger.LogError("Problem z dodaniem dokumentu", ex);
             }
 
         }

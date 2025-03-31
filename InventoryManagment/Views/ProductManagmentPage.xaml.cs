@@ -87,7 +87,6 @@ namespace InventoryManagment.Views
                     Stock = transakcje.Where(t => t.ProduktId == p.Id)
                                       .Sum(t => GetStockChange(t, dokumenty))
                 }).ToList();
-
                 RenderProductList(_productWithStock);
             }
             else throw new Exception("Product Managment: Błąd pobierania bazy danych");

@@ -13,7 +13,7 @@
 
         <!-- Nagłówki tabeli -->
         <Grid ColumnDefinitions="2*, *, 2*" BackgroundColor="#e0e0e0" Padding="5" Margin="0" Grid.Row="2" HeightRequest="40">
-            <Label Text="Nadawca/Odbiorca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="0"/>
+            <Label Text="Odbiorca/Dostawca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="0"/>
             <Label Text="Data" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="1"/>
             <Label Text="Rodzaj dokumentu" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" Grid.Column="2"/>
         </Grid>
