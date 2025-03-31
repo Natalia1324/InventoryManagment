@@ -13,10 +13,6 @@
         <Entry x:Name="PrzeznaczenieEntry" Placeholder="Przeznaczenie" />
         <Entry x:Name="OpisEntry" Placeholder="Opis" />
         <Entry x:Name="StockEntry" Placeholder="Stan magazynowy"/>
-        <Grid ColumnDefinitions="Auto, *">
-            <Label Text="Wyzeruj stan magazynowy po edycji" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="1"/>
-            <CheckBox x:Name="StockExport" IsChecked="False" Grid.Column="0"/>
-        </Grid>
 
         <Button Text="Zapisz" Clicked="OnSaveClicked" BackgroundColor="DarkGreen" TextColor="White" />
         <Button Text="Usuń" Clicked="OnDeleteClicked" BackgroundColor="DarkRed" TextColor="White" IsVisible="False" x:Name="DeleteButton" />
