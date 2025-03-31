@@ -100,7 +100,6 @@ namespace InventoryManagment.Views
                 await DisplayAlert("Błąd", "Nie udało się wczytać danych produktu.", "OK");
             }
         }
-
         private async void OnSaveClicked(object sender, EventArgs e)
         {
             try
@@ -116,17 +115,41 @@ namespace InventoryManagment.Views
                     isDel = false
                 };
 
-                if (_product.Id == 0)
+                var isOnlyStockChanged = _product.Rozmiar == newProduct.Rozmiar &&
+                                         _product.Grubosc == newProduct.Grubosc &&
+                                         _product.Kolor == newProduct.Kolor &&
+                                         _product.Ilosc_Paczka == newProduct.Ilosc_Paczka &&
+                                         _product.Przeznaczenie == newProduct.Przeznaczenie &&
+                                         _product.Opis == newProduct.Opis;
+
+                var newStock = int.TryParse(StockEntry.Text.Replace(" ", ""), out var stock) ? stock : _initialStock;
+                var stockDifference = newStock - _initialStock;
+
+                if (_product.Id != 0 && isOnlyStockChanged && stockDifference != 0)
                 {
-                    await _dbService.CreateProdukt(newProduct);
+                    await UpdateStock(_product, newStock);
+                    await DisplayAlert("Zmieniono", "Zaktualizowano jedynie stan magazynowy.", "OK");
                 }
                 else
                 {
-                    _product.isDel = true;
-                    await _dbService.UpdateProdukt(_product);
-                    await _dbService.CreateProdukt(newProduct);
-                    await UpdateStock();
-                    await DisplayAlert("Zmieniono", "Produkt został zaktualizowany.", "OK");
+                    if (_product.Id == 0)
+                    {
+                        // Tworzymy nowy produkt
+                        await _dbService.CreateProdukt(newProduct);
+                        await TransferStock(null, newProduct);
+                    }
+                    else
+                    {
+                        // Najpierw tworzymy nowy produkt
+                        await _dbService.CreateProdukt(newProduct);
+
+                        await TransferStock(_product, newProduct);
+                        // Na końcu oznaczamy stary produkt jako usunięty
+                        _product.isDel = true;
+                        await _dbService.UpdateProdukt(_product);
+
+                        await DisplayAlert("Zmieniono", "Produkt został zaktualizowany.", "OK");
+                    }
                 }
                 await Navigation.PopAsync();
             }
@@ -137,11 +160,45 @@ namespace InventoryManagment.Views
             }
         }
 
-        private async Task UpdateStock()
+
+        private async Task TransferStock(Produkty oldProduct, Produkty newProduct)
         {
             try
             {
-                var newStock = int.TryParse(StockEntry.Text.Replace(" ", ""), out var stock) ? stock : _initialStock;
+                // Jeśli oldProduct == null, oznacza to nowy produkt, więc przenosimy tyle, ile wprowadzono
+                var stockDifference = int.Parse(StockEntry.Text);
+                if (stockDifference == 0) return;
+
+                var dokument = new Dokumenty
+                {
+                    Nr_Dokumentu = "Auto-generated",
+                    Typ_Dokumentu = stockDifference > 0 ? TypDokumentu.Przychod_Wewnetrzny : TypDokumentu.Rozchod_Zewnetrzny,
+                    Przeznaczenie = "Wyrównanie stanu magazynowego",
+                    Data_Wystawienia = DateTime.Now
+                };
+
+                await _dbService.CreateDokument(dokument);
+
+                // Przenosimy tylko do nowego produktu
+                var transakcjaIn = new Transakcje
+                {
+                    ProduktId = newProduct.Id, // Nowy produkt dostaje stan magazynowy
+                    DokumentId = dokument.Id,
+                    Zmiana_Stanu = stockDifference
+                };
+                await _dbService.CreateTransakcja(transakcjaIn);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError($"Błąd przy przenoszeniu stanu magazynowego", ex);
+                await DisplayAlert("Błąd", "Nie udało się przenieść stanu magazynowego.", "OK");
+            }
+        }
+
+        private async Task UpdateStock(Produkty product, int newStock)
+        {
+            try
+            {
                 var stockDifference = newStock - _initialStock;
                 if (stockDifference == 0) return;
 
@@ -155,15 +212,13 @@ namespace InventoryManagment.Views
 
                 await _dbService.CreateDokument(dokument);
 
-
                 var transakcja = new Transakcje
                 {
-                    ProduktId = _product.Id,
+                    ProduktId = product.Id,
                     DokumentId = dokument.Id,
                     Zmiana_Stanu = Math.Abs(stockDifference)
                 };
                 await _dbService.CreateTransakcja(transakcja);
-
             }
             catch (Exception ex)
             {
