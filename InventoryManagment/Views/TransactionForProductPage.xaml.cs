@@ -26,6 +26,7 @@ namespace InventoryManagment.Views
 
             BindingContext = this;
             _productId = productId;
+            Debug.WriteLine(productId);
             MauiProgram.OnKeyDown += HandleKeyDown;
         }
         protected override async void OnAppearing()
