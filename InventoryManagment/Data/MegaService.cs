@@ -11,7 +11,7 @@ namespace InventoryManagment.Data
     public class MegaService
     {
         private readonly MegaApiClient _client = new MegaApiClient();
-        private readonly string _credentialsPath = Path.Combine(FileSystem.AppDataDirectory, "credentials.json");
+        private readonly string _credentialsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "credentials.json");
         private string _email = string.Empty;
         private string _password = string.Empty;
 

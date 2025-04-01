@@ -73,24 +73,68 @@ namespace InventoryManagment.Views
             return 0;
         }
 
-        private async void LoadProductsAndStock()
-        {
-            var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).OrderBy(p => p.ToString()).ToList();
-            var transakcje = await _dbService.GetTransakcje();
-            var dokumenty = await _dbService.GetDokumenty();
+        private int currentOffset = 0;
+        private bool isLoading = false;
+        private bool hasMoreData = true;
 
-            if (produkty != null && transakcje != null && dokumenty != null)
+        private async void LoadProductsAndStock(bool reset = false)
+        {
+            if (isLoading || !hasMoreData) return;
+            isLoading = true;
+
+            try
             {
-                _productWithStock = produkty.Select(p => new ProductWithStock
+                if (reset)
                 {
-                    Produkt = p,
-                    Stock = transakcje.Where(t => t.ProduktId == p.Id)
-                                      .Sum(t => GetStockChange(t, dokumenty))
-                }).ToList();
+                    currentOffset = 0;
+                    hasMoreData = true;
+                    _productWithStock.Clear();
+                }
+
+                //var produkty = await _dbService.GetProduktyPaginated(currentOffset, 100);
+                var produkty = await _dbService.GetProdukty();
+                if (produkty == null || produkty.Count == 0)
+                {
+                    hasMoreData = false;
+                }
+                else
+                {
+                    var transakcje = await _dbService.GetTransakcje();
+                    var dokumenty = await _dbService.GetDokumenty();
+
+                    var newProducts = produkty.Where(p => !p.isDel)
+                                              .OrderBy(p => p.ToString())
+                                              .Select(p => new ProductWithStock
+                                              {
+                                                  Produkt = p,
+                                                  Stock = transakcje.Where(t => t.ProduktId == p.Id)
+                                                                    .Sum(t => GetStockChange(t, dokumenty))
+                                              }).ToList();
+
+                    _productWithStock.AddRange(newProducts);
+                    currentOffset += produkty.Count;
+                }
 
                 RenderProductList(_productWithStock);
             }
-            else throw new Exception("Product Managment: Błąd pobierania bazy danych");
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Product Management: Błąd pobierania danych", ex);
+                await DisplayAlert("Błąd", "Nie udało się załadować produktów.", "OK");
+            }
+            finally
+            {
+                isLoading = false;
+            }
+        }
+
+        private void OnScrolled(object sender, ScrolledEventArgs e)
+        {
+            //var scrollView = (ScrollView)sender;
+            //if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
+            //{
+            //    LoadProductsAndStock();
+            //}
         }
 
 
@@ -109,6 +153,7 @@ namespace InventoryManagment.Views
                         ColumnDefinitions = new ColumnDefinitionCollection
             {
                 new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+                new ColumnDefinition { Width = GridLength.Star },
                 new ColumnDefinition { Width = GridLength.Star },
                 new ColumnDefinition { Width = GridLength.Auto }
             },
@@ -169,7 +214,39 @@ namespace InventoryManagment.Views
                         FontSize = 14
                     };
                     grid.Add(nameLabel, 0, 0);
+                    // Kolumna Przeznaczenie + Opis
+                    var destinationStack = new StackLayout
+                    {
+                        Orientation = StackOrientation.Vertical,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
 
+                    // Przeznaczenie (większy tekst)
+                    var destinationLabel = new Label
+                    {
+                        Text = item.Produkt.Przeznaczenie,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                        FontSize = 14
+                    };
+
+                    // Opis (mniejszy, szary tekst)
+                    var descriptionLabel = new Label
+                    {
+                        Text = item.Produkt.Opis,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                        FontSize = 12,
+                        TextColor = Colors.Gray
+                    };
+
+                    // Dodajemy oba labele do StackLayout
+                    destinationStack.Children.Add(destinationLabel);
+                    destinationStack.Children.Add(descriptionLabel);
+
+                    // Dodajemy StackLayout do Grida w kolumnie 1
+                    grid.Add(destinationStack, 1, 0);
                     // Stan produktu
                     var stockLabel = new Label
                     {
@@ -179,7 +256,7 @@ namespace InventoryManagment.Views
                         Margin = new Thickness(0, 0, 20, 0),
                         FontSize = 14
                     };
-                    grid.Add(stockLabel, 1, 0);
+                    grid.Add(stockLabel, 2, 0);
 
                     // Przycisk Edytuj
                     var editButton = new ImageButton
@@ -199,7 +276,7 @@ namespace InventoryManagment.Views
                         await Navigation.PushAsync(new ProductEditPage(item.Produkt));
                     };
 
-                    grid.Add(editButton, 2, 0);
+                    grid.Add(editButton, 3, 0);
 
                     ProductRowsStack.Children.Add(grid);
                 }
@@ -211,20 +288,34 @@ namespace InventoryManagment.Views
         }
 
 
-        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             try
             {
                 var searchText = e.NewTextValue?.ToLower() ?? "";
-                var filtered = _productWithStock
-                    .Where(p => p.Produkt != null && p.Produkt.ToString().Contains(searchText, StringComparison.CurrentCultureIgnoreCase))
-                    .ToList();
+                if (string.IsNullOrWhiteSpace(searchText))
+                {
+                    LoadProductsAndStock(reset: true);
+                    return;
+                }
+
+                var produkty = await _dbService.SearchProdukty(searchText, 100);
+                var transakcje = await _dbService.GetTransakcje();
+                var dokumenty = await _dbService.GetDokumenty();
+
+                var filtered = produkty.Select(p => new ProductWithStock
+                {
+                    Produkt = p,
+                    Stock = transakcje.Where(t => t.ProduktId == p.Id)
+                                      .Sum(t => GetStockChange(t, dokumenty))
+                }).ToList();
+
                 RenderProductList(filtered);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Błąd podczas filtrowania produktów: {ex.Message}");
-                DisplayAlert("Błąd", "Wystąpił problem podczas wyszukiwania produktów.", "OK");
+                await DisplayAlert("Błąd", "Wystąpił problem podczas wyszukiwania.", "OK");
             }
         }
 

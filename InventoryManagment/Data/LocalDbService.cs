@@ -16,7 +16,8 @@ namespace InventoryManagment.Data
 
         public LocalDbService()
         {
-            _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
+            Debug.WriteLine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DB_NAME));
+            _connection = new SQLiteAsyncConnection((Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DB_NAME)));
             Task.Run(async () => await InitializeDatabase()).ConfigureAwait(false);
         }
 
@@ -30,7 +31,7 @@ namespace InventoryManagment.Data
 
                 if (await _connection.Table<Produkty>().CountAsync() == 0)
                 {
-                    await ImportProductsFromJson(Path.Combine(FileSystem.AppDataDirectory, "products.json"));
+                    await ImportProductsFromJson(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "products.json"));
                 }
             }
             catch (Exception ex)
@@ -175,7 +176,24 @@ namespace InventoryManagment.Data
             }
         }
 
+        public async Task<List<Produkty>> GetProduktyPaginated(int offset, int limit)
+        {
+            return await _connection.Table<Produkty>()
+                .Where(p => !p.isDel)
+                .OrderBy(p => p.Id)
+                .Skip(offset)
+                .Take(limit)
+                .ToListAsync();
+        }
 
+        public async Task<List<Produkty>> SearchProdukty(string query, int limit)
+        {
+            return await _connection.Table<Produkty>()
+                .Where(p => !p.isDel && (p.ToString().Contains(query) || p.Kolor.Contains(query)))
+                .OrderBy(p => p.Rozmiar)
+                .Take(limit)
+                .ToListAsync();
+        }
 
         // ==============================
         // 📌 CRUD dla Transakcje

@@ -24,7 +24,7 @@ namespace InventoryManagment.Models
 
         public override string ToString()
         {
-            return $"{Rozmiar} {Kolor} {(Grubosc.HasValue ? Grubosc.Value.ToString("0.###") : "")} {(Ilosc_Paczka.HasValue ? "A" : "")}{Ilosc_Paczka} {Przeznaczenie}";
+            return $"{Rozmiar} {Kolor} {(Grubosc.HasValue ? Grubosc.Value.ToString("0.###") : "")} {(Ilosc_Paczka.HasValue ? "A" : "")}{Ilosc_Paczka}";
 
         }
     }
