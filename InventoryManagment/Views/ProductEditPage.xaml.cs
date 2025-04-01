@@ -80,7 +80,9 @@ namespace InventoryManagment.Views
 
                 DeleteButton.IsVisible = _product.Id != 0;
 
-                var produkty = await _dbService.GetProdukty() ?? new List<Produkty>();
+                var produkty = (await _dbService.GetProdukty())?
+                .Where(p => !p.isDel)
+                .ToList() ?? new List<Produkty>();
                 var transakcje = await _dbService.GetTransakcje() ?? new List<Transakcje>();
                 var dokumenty = await _dbService.GetDokumenty() ?? new List<Dokumenty>();
 
@@ -173,7 +175,7 @@ namespace InventoryManagment.Views
                 {
                     Nr_Dokumentu = "Auto-generated",
                     Typ_Dokumentu = stockDifference > 0 ? TypDokumentu.Przychod_Wewnetrzny : TypDokumentu.Rozchod_Zewnetrzny,
-                    Przeznaczenie = "Wyrównanie stanu magazynowego",
+                    Przeznaczenie = "Wyrównanie Stanu Magazynowego",
                     Data_Wystawienia = DateTime.Now
                 };
 

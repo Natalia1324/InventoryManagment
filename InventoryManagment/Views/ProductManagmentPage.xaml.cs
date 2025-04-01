@@ -18,7 +18,6 @@ namespace InventoryManagment.Views
         {
             InitializeComponent();
             _dbService = App.Services.GetRequiredService<LocalDbService>();
-            //LoadProductsAndStock();
         }
 
         protected override async void OnAppearing()
@@ -26,7 +25,7 @@ namespace InventoryManagment.Views
             base.OnAppearing();
             try
             {
-                LoadProductsAndStock();
+                await LoadProductsAndStock(true);
             }
             catch (Exception ex)
             {
@@ -77,28 +76,37 @@ namespace InventoryManagment.Views
         private bool isLoading = false;
         private bool hasMoreData = true;
 
-        private async void LoadProductsAndStock(bool reset = false)
+        private async Task LoadProductsAndStock(bool reset = false)
         {
-            if (isLoading || !hasMoreData) return;
+            if (isLoading || !hasMoreData) {
+                Debug.WriteLine("⏳ Pobieranie zatrzymane - isLoading: " + isLoading + ", hasMoreData: " + hasMoreData);
+                return; 
+            }
             isLoading = true;
 
             try
             {
                 if (reset)
                 {
+                    Debug.WriteLine("🔄 Resetowanie paginacji...");
                     currentOffset = 0;
                     hasMoreData = true;
                     _productWithStock.Clear();
                 }
-
-                //var produkty = await _dbService.GetProduktyPaginated(currentOffset, 100);
-                var produkty = await _dbService.GetProdukty();
+                Debug.WriteLine($"📥 Pobieranie produktów... Offset: {currentOffset}, Limit: 100");
+                var produkty = (await _dbService.GetProduktyPaginated(currentOffset, 100))?.Where(p => !p.isDel).ToList() ?? new List<Produkty>();
+                var produkty2 = (await _dbService.GetProdukty())?
+                .Where(p => !p.isDel)
+                .ToList() ?? new List<Produkty>();
+                Debug.WriteLine($"Całkowita ilość produktów do pobrania: {produkty2.Count}");
                 if (produkty == null || produkty.Count == 0)
                 {
+                    Debug.WriteLine("❌ Brak więcej produktów! hasMoreData = false");
                     hasMoreData = false;
                 }
                 else
                 {
+                    Debug.WriteLine($"✅ Załadowano {produkty.Count} produktów");
                     var transakcje = await _dbService.GetTransakcje();
                     var dokumenty = await _dbService.GetDokumenty();
 
@@ -113,6 +121,7 @@ namespace InventoryManagment.Views
 
                     _productWithStock.AddRange(newProducts);
                     currentOffset += produkty.Count;
+                    Debug.WriteLine($"➡️ Nowy offset: {currentOffset}");
                 }
 
                 RenderProductList(_productWithStock);
@@ -128,16 +137,15 @@ namespace InventoryManagment.Views
             }
         }
 
-        private void OnScrolled(object sender, ScrolledEventArgs e)
+        private async void OnScrolled(object sender, ScrolledEventArgs e)
         {
-            //var scrollView = (ScrollView)sender;
-            //if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
-            //{
-            //    LoadProductsAndStock();
-            //}
+            var scrollView = (ScrollView)sender;
+            if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
+            {
+                await LoadProductsAndStock();
+            }
         }
-
-
+        
         private void RenderProductList(List<ProductWithStock> products)
         {
             try
@@ -295,7 +303,7 @@ namespace InventoryManagment.Views
                 var searchText = e.NewTextValue?.ToLower() ?? "";
                 if (string.IsNullOrWhiteSpace(searchText))
                 {
-                    LoadProductsAndStock(reset: true);
+                    await LoadProductsAndStock(reset: true);
                     return;
                 }
 

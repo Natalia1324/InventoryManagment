@@ -560,7 +560,7 @@
     "Przeznaczenie": "Ochojec",
     "Opis": ""
   },
-  //begin
+  
 
   {
     "Rozmiar": "140L",
@@ -698,8 +698,8 @@
     "Przeznaczenie": "WITOS",
     "Opis": ""
   },
-  //end
-  //begin
+  
+  
 
   {
     "Rozmiar": "160L",
@@ -829,8 +829,8 @@
     "Przeznaczenie": "GLIWICE",
     "Opis": ""
   },
-  //end
-  //begin
+  
+  
   {
     "Rozmiar": "20L",
     "Grubosc": null,
@@ -1007,7 +1007,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "140L",
     "Grubosc": null,
@@ -1016,7 +1016,7 @@
     "Przeznaczenie": "witos",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "35L",
     "Grubosc": null,
@@ -1057,7 +1057,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "35L",
     "Grubosc": null,
@@ -1082,7 +1082,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "35L",
     "Grubosc": null,
@@ -1203,7 +1203,7 @@
     "Przeznaczenie": "POMORSKA",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "50/60",
     "Grubosc": 0.028,
@@ -1212,7 +1212,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "50/60",
     "Grubosc": null,
@@ -1269,7 +1269,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "50/70",
     "Grubosc": null,
@@ -1342,7 +1342,7 @@
     "Przeznaczenie": "Tarnów",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "60/60",
     "Grubosc": null,
@@ -1455,7 +1455,7 @@
     "Przeznaczenie": "POMORSKA",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "60/80",
     "Grubosc": 0.035,
@@ -1488,7 +1488,7 @@
     "Przeznaczenie": "MIKULICZ",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "60/90",
     "Grubosc": null,
@@ -1633,7 +1633,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -1642,7 +1642,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -1699,7 +1699,7 @@
     "Przeznaczenie": "LATOS",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -1708,7 +1708,7 @@
     "Przeznaczenie": "OLESNO",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -1877,8 +1877,8 @@
     "Przeznaczenie": "LATOS",
     "Opis": ""
   },
-  //end
-  //begin
+  
+  
   {
     "Rozmiar": "60L",
     "Grubosc": null,
@@ -2031,7 +2031,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "70/110",
     "Grubosc": 0.04,
@@ -2040,7 +2040,7 @@
     "Przeznaczenie": "TARNÓW SZ.",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "70/110",
     "Grubosc": 0.05,
@@ -2193,8 +2193,8 @@
     "Przeznaczenie": "PIOTRKÓW",
     "Opis": ""
   },
-  //end
-  //begin
+  
+  
   {
     "Rozmiar": "70/60",
     "Grubosc": null,
@@ -2267,7 +2267,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "80/120",
     "Grubosc": 0.03,
@@ -2276,7 +2276,7 @@
     "Przeznaczenie": "JONSCHERA",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "80/120",
     "Grubosc": null,
@@ -2341,7 +2341,7 @@
     "Przeznaczenie": "POMORSKA",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "80/160",
     "Grubosc": null,
@@ -2382,7 +2382,7 @@
     "Przeznaczenie": "NYSA",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "90/120",
     "Grubosc": null,
@@ -2431,7 +2431,7 @@
     "Przeznaczenie": "",
     "Opis": ""
   },
-  //end
+  
   {
     "Rozmiar": "90/130",
     "Grubosc": 0.04,
@@ -2440,7 +2440,7 @@
     "Przeznaczenie": "PIOTRKÓW",
     "Opis": ""
   },
-  //begin
+  
   {
     "Rozmiar": "90/140",
     "Grubosc": null,
@@ -2529,7 +2529,6 @@
     "Przeznaczenie": "PŁUCNY",
     "Opis": ""
   },
-  //end
   {
     "Rozmiar": "Fartuchy",
     "Grubosc": null,

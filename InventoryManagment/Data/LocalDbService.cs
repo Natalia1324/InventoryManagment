@@ -154,7 +154,11 @@ namespace InventoryManagment.Data
         {
             try
             {
-                return await _connection.Table<Produkty>().ToListAsync();
+                return await _connection.Table<Produkty>()
+                .OrderBy(p => p.Rozmiar)
+                .ThenBy(p => p.Kolor)
+                .ThenBy(p => p.Ilosc_Paczka)
+                .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -180,7 +184,9 @@ namespace InventoryManagment.Data
         {
             return await _connection.Table<Produkty>()
                 .Where(p => !p.isDel)
-                .OrderBy(p => p.Id)
+                .OrderBy(p => p.Rozmiar)
+                .ThenBy(p => p.Kolor)
+                .ThenBy(p => p.Ilosc_Paczka)
                 .Skip(offset)
                 .Take(limit)
                 .ToListAsync();
