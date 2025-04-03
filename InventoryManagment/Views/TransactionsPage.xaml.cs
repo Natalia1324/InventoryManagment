@@ -5,12 +5,19 @@ using System.Diagnostics;
 
 namespace InventoryManagment.Views
 {
+
     public partial class TransactionsPage : ContentPage
     {
         private readonly LocalDbService _dbService;
+        public List<dynamic> AllTransactions { get; set; } = new List<dynamic>(); // Pełna lista transakcji
+        public ObservableCollection<dynamic> DisplayedTransactions { get; set; } = new ObservableCollection<dynamic>(); // Wyświetlana lista
 
-        public ObservableCollection<dynamic> Transactions { get; set; } = new ObservableCollection<dynamic>();
-        public ObservableCollection<dynamic> FilteredTransactions { get; set; } = new ObservableCollection<dynamic>();
+        private int currentOffset = 0;
+        private bool isLoading = false;
+        private bool hasMoreData = true;
+        private const int PageSize = 50;
+        private string _currentSortColumn = "DataWystawienia";
+        private bool _isAscending = true;
 
         public TransactionsPage()
         {
@@ -19,96 +26,74 @@ namespace InventoryManagment.Views
             BindingContext = this;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            try
-            {
-                LoadTransactions();
-            }
-            catch (Exception ex)
-            {
-                ErrorLogger.LogError($"Błąd przy ładowaniu transakcji", ex);
-                DisplayAlert("Błąd", "Nie udało się pobrać listy transakcji.", "OK");
-            }
+            await LoadAllTransactions();
+            LoadNextPage(); // Wczytaj pierwsze 50 rekordów
         }
 
-        private async void LoadTransactions()
+        private async Task LoadAllTransactions()
         {
             try
             {
-                var transakcje = await _dbService.GetTransakcje();
-                if (transakcje == null)
-                {
-                    throw new Exception("Błąd pobierania transakcji.");
-                }
+                isLoading = true;
+                AllTransactions.Clear();
+                DisplayedTransactions.Clear();
+                currentOffset = 0;
+                hasMoreData = true;
 
-                Transactions.Clear();
-                FilteredTransactions.Clear();
+                var transakcje = await _dbService.GetTransakcje();
 
                 foreach (var transakcja in transakcje)
                 {
-                    if (transakcja == null) continue;
-
                     var produkt = await _dbService.GetProduktById(transakcja.ProduktId) ?? new Produkty { Rozmiar = "Nieznany produkt" };
                     var dokument = await _dbService.GetDokumentById(transakcja.DokumentId);
-
                     if (dokument == null) continue;
 
-                    string typDokumentu = dokument?.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny ? "Rozchód" : "Przychód";
+                    string typDokumentu = dokument.Typ_Dokumentu == TypDokumentu.Rozchod_Zewnetrzny ? "Rozchód" : "Przychód";
 
                     var transaction = new
                     {
-                        Produkt = produkt.ToString(),
-                        Przeznaczenie = dokument?.Przeznaczenie ?? "Brak danych",
+                        Produkt = produkt.ToStringFull(),
+                        Przeznaczenie = dokument.Przeznaczenie ?? "Brak danych",
                         TypDokumentu = typDokumentu,
-                        Dostawca = transakcja?.Dostawca ?? "Nieznany",
-                        DataWystawienia = dokument?.Data_Wystawienia.ToString("yyyy-MM-dd") ?? "Brak daty",
-                        ZmianaStanu = transakcja?.Zmiana_Stanu ?? 0,
-                        Notatka = transakcja?.Notatka ?? "Brak notatki"
+                        Dostawca = transakcja.Dostawca ?? "Nieznany",
+                        DataWystawienia = dokument.Data_Wystawienia.ToString("yyyy-MM-dd"),
+                        ZmianaStanu = transakcja.Zmiana_Stanu,
+                        Notatka = transakcja.Notatka ?? "Brak notatki"
                     };
 
-                    Transactions.Add(transaction);
-                    FilteredTransactions.Add(transaction);
+                    AllTransactions.Add(transaction);
                 }
 
-                RenderTransactionList(FilteredTransactions.ToList());
+                SortTransactions();
+                LoadNextPage();
             }
             catch (Exception ex)
             {
-                ErrorLogger.LogError($"Błąd przy ładowaniu transakcji", ex);
-                await DisplayAlert("Błąd", "Nie udało się pobrać danych o transakcjach.", "OK");
+                ErrorLogger.LogError("Błąd przy ładowaniu transakcji", ex);
+                await DisplayAlert("Błąd", "Nie udało się pobrać listy transakcji.", "OK");
+            }
+            finally
+            {
+                isLoading = false;
             }
         }
 
-
-        private void OnFilterChanged(object sender, TextChangedEventArgs e)
+        private void LoadNextPage()
         {
-            try
+            if (!hasMoreData || isLoading) return;
+
+            var nextBatch = AllTransactions.Skip(currentOffset).Take(PageSize).ToList();
+            foreach (var transaction in nextBatch)
             {
-                FilteredTransactions.Clear();
-
-                var filtered = Transactions.Where(t =>
-                    (string.IsNullOrEmpty(ProductFilter?.Text) || (t.Produkt?.Contains(ProductFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
-                    (string.IsNullOrEmpty(DestinationFilter?.Text) || (t.Przeznaczenie?.Contains(DestinationFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
-                    (string.IsNullOrEmpty(DocumentTypeFilter?.Text) || (t.TypDokumentu?.Contains(DocumentTypeFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
-                    (string.IsNullOrEmpty(SupplierFilter?.Text) || (t.Dostawca?.Contains(SupplierFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
-                    (string.IsNullOrEmpty(DateFilter?.Text) || (t.DataWystawienia?.Contains(DateFilter.Text) ?? false)) &&
-                    (string.IsNullOrEmpty(QuantityFilter?.Text) || (t.ZmianaStanu?.ToString().Contains(QuantityFilter.Text) ?? false)) &&
-                    (string.IsNullOrEmpty(NoteFilter?.Text) || (t.Notatka?.Contains(NoteFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false))
-                ).ToList();
-
-                foreach (var transaction in filtered)
-                {
-                    FilteredTransactions.Add(transaction);
-                }
-
-                RenderTransactionList(filtered);
+                DisplayedTransactions.Add(transaction);
             }
-            catch (Exception ex)
-            {
-                ErrorLogger.LogError($"Błąd przy filtrowaniu transakcji", ex);
-            }
+
+            currentOffset += nextBatch.Count;
+            hasMoreData = nextBatch.Count == PageSize; // Jeśli mniej niż PageSize, nie ma więcej danych
+            RenderTransactionList(DisplayedTransactions.ToList());
         }
 
         private void RenderTransactionList(List<dynamic> transactions)
@@ -124,85 +109,175 @@ namespace InventoryManagment.Views
                     var grid = new Grid
                     {
                         ColumnDefinitions = new ColumnDefinitionCollection
-                        {
-                            new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                            new ColumnDefinition { Width = GridLength.Star },
-                            new ColumnDefinition { Width = GridLength.Star },
-                            new ColumnDefinition { Width = GridLength.Star },
-                            new ColumnDefinition { Width = GridLength.Star },
-                            new ColumnDefinition { Width = GridLength.Star },
-                            new ColumnDefinition { Width = GridLength.Star }
-                        },
+    {
+        new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+        new ColumnDefinition { Width = GridLength.Star },
+        new ColumnDefinition { Width = GridLength.Star },
+        new ColumnDefinition { Width = GridLength.Star },
+        new ColumnDefinition { Width = GridLength.Star },
+        new ColumnDefinition { Width = GridLength.Star },
+        new ColumnDefinition { Width = GridLength.Star }
+    },
                         Padding = new Thickness(5, 2),
                         BackgroundColor = i % 2 == 0 ? Colors.White : Color.FromArgb("#f0f0f0"),
                         RowSpacing = 1,
                         ColumnSpacing = 1
                     };
 
-                    // Kolumny danych transakcji
-                    grid.Add(new Label
+                    // Produkt
+                    var productLabel = new Label
                     {
                         Text = item.Produkt ?? "Brak danych",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 0, 0);
+                    };
+                    grid.Add(productLabel, 0, 0);
 
-                    grid.Add(new Label
+                    // Przeznaczenie
+                    var destinationLabel = new Label
                     {
                         Text = item.Przeznaczenie ?? "Brak danych",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 1, 0);
+                    };
+                    grid.Add(destinationLabel, 1, 0);
 
-                    grid.Add(new Label
+                    // Typ dokumentu
+                    var documentTypeLabel = new Label
                     {
                         Text = item.TypDokumentu ?? "Brak danych",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 2, 0);
+                    };
+                    grid.Add(documentTypeLabel, 2, 0);
 
-                    grid.Add(new Label
+                    // Dostawca
+                    var supplierLabel = new Label
                     {
                         Text = item.Dostawca ?? "Brak danych",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 3, 0);
+                    };
+                    grid.Add(supplierLabel, 3, 0);
 
-                    grid.Add(new Label
+                    // Data wystawienia
+                    var dateLabel = new Label
                     {
                         Text = item.DataWystawienia ?? "Brak daty",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 4, 0);
+                    };
+                    grid.Add(dateLabel, 4, 0);
 
-                    grid.Add(new Label
+                    // Zmiana stanu (ilość)
+                    var quantityLabel = new Label
                     {
                         Text = item.ZmianaStanu.ToString(),
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 5, 0);
+                    };
+                    grid.Add(quantityLabel, 5, 0);
 
-                    grid.Add(new Label
+                    // Notatka
+                    var noteLabel = new Label
                     {
                         Text = item.Notatka ?? "Brak notatki",
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
                         FontSize = 14
-                    }, 6, 0);
+                    };
+                    grid.Add(noteLabel, 6, 0);
 
+                    // Dodanie siatki do głównego kontenera
                     TransactionRowsStack.Children.Add(grid);
+
                 }
             }
             catch (Exception ex)
             {
-                ErrorLogger.LogError($"Błąd przy renderowaniu listy transakcji", ex);
+                ErrorLogger.LogError("Błąd przy renderowaniu listy transakcji", ex);
             }
         }
+
+        private void OnFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            var filtered = AllTransactions
+                .Where(t =>
+                    (string.IsNullOrEmpty(ProductFilter?.Text) || (t.Produkt?.Contains(ProductFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
+                    (string.IsNullOrEmpty(DestinationFilter?.Text) || (t.Przeznaczenie?.Contains(DestinationFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
+                    (string.IsNullOrEmpty(DocumentTypeFilter?.Text) || (t.TypDokumentu?.Contains(DocumentTypeFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
+                    (string.IsNullOrEmpty(SupplierFilter?.Text) || (t.Dostawca?.Contains(SupplierFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
+                    (string.IsNullOrEmpty(DateFilter?.Text) || (t.DataWystawienia?.Contains(DateFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)) &&
+                    (string.IsNullOrEmpty(QuantityFilter?.Text) || (t.ZmianaStanu.ToString().Contains(QuantityFilter.Text, StringComparison.OrdinalIgnoreCase))) &&
+                    (string.IsNullOrEmpty(NoteFilter?.Text) || (t.Notatka?.Contains(NoteFilter.Text, StringComparison.OrdinalIgnoreCase) ?? false)))
+                .ToList();
+
+            // Resetowanie paginacji i aktualizacja listy
+            DisplayedTransactions.Clear();
+            foreach (var transaction in filtered)
+            {
+                DisplayedTransactions.Add(transaction);
+            }
+
+            // Aktualizacja UI
+            RenderTransactionList(DisplayedTransactions.ToList());
+        }
+
+        private void OnScrolled(object sender, ScrolledEventArgs e)
+        {
+            var scrollView = (ScrollView)sender;
+            if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
+            {
+                LoadNextPage();
+            }
+        }
+
+        private void OnSortClicked(object sender, EventArgs e)
+        {
+            if (sender is Button button)
+            {
+                string clickedColumn = button.CommandParameter.ToString();
+
+                // Jeśli kliknięto ten sam nagłówek co wcześniej, zmieniamy kolejność sortowania
+                if (_currentSortColumn == clickedColumn)
+                {
+                    _isAscending = !_isAscending;
+                }
+                else
+                {
+                    _currentSortColumn = clickedColumn;
+                    _isAscending = true; // Domyślnie sortujemy rosnąco przy pierwszym kliknięciu nowej kolumny
+                }
+
+                SortTransactions();
+            }
+        }
+
+
+        private void SortTransactions()
+        {
+            // Sortowanie listy transakcji na podstawie wybranej kolumny i kierunku sortowania
+            AllTransactions = (_isAscending
+                ? AllTransactions.OrderBy(t => t.GetType().GetProperty(_currentSortColumn)?.GetValue(t))
+                : AllTransactions.OrderByDescending(t => t.GetType().GetProperty(_currentSortColumn)?.GetValue(t)))
+                .ToList();
+
+            // Reset paginacji
+            DisplayedTransactions.Clear();
+            currentOffset = 0;
+            hasMoreData = true;
+
+            // Załaduj ponownie pierwszą stronę
+            LoadNextPage();
+        }
+
     }
 }
+
+

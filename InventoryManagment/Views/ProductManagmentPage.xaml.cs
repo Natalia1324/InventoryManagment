@@ -79,7 +79,6 @@ namespace InventoryManagment.Views
         private async Task LoadProductsAndStock(bool reset = false)
         {
             if (isLoading || !hasMoreData) {
-                Debug.WriteLine("⏳ Pobieranie zatrzymane - isLoading: " + isLoading + ", hasMoreData: " + hasMoreData);
                 return; 
             }
             isLoading = true;
@@ -88,25 +87,17 @@ namespace InventoryManagment.Views
             {
                 if (reset)
                 {
-                    Debug.WriteLine("🔄 Resetowanie paginacji...");
                     currentOffset = 0;
                     hasMoreData = true;
                     _productWithStock.Clear();
                 }
-                Debug.WriteLine($"📥 Pobieranie produktów... Offset: {currentOffset}, Limit: 100");
                 var produkty = (await _dbService.GetProduktyPaginated(currentOffset, 100))?.Where(p => !p.isDel).ToList() ?? new List<Produkty>();
-                var produkty2 = (await _dbService.GetProdukty())?
-                .Where(p => !p.isDel)
-                .ToList() ?? new List<Produkty>();
-                Debug.WriteLine($"Całkowita ilość produktów do pobrania: {produkty2.Count}");
                 if (produkty == null || produkty.Count == 0)
                 {
-                    Debug.WriteLine("❌ Brak więcej produktów! hasMoreData = false");
                     hasMoreData = false;
                 }
                 else
                 {
-                    Debug.WriteLine($"✅ Załadowano {produkty.Count} produktów");
                     var transakcje = await _dbService.GetTransakcje();
                     var dokumenty = await _dbService.GetDokumenty();
 
@@ -121,7 +112,6 @@ namespace InventoryManagment.Views
 
                     _productWithStock.AddRange(newProducts);
                     currentOffset += produkty.Count;
-                    Debug.WriteLine($"➡️ Nowy offset: {currentOffset}");
                 }
 
                 RenderProductList(_productWithStock);
@@ -162,6 +152,7 @@ namespace InventoryManagment.Views
             {
                 new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
                 new ColumnDefinition { Width = GridLength.Star },
+                new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
                 new ColumnDefinition { Width = GridLength.Star },
                 new ColumnDefinition { Width = GridLength.Auto }
             },
@@ -223,12 +214,6 @@ namespace InventoryManagment.Views
                     };
                     grid.Add(nameLabel, 0, 0);
                     // Kolumna Przeznaczenie + Opis
-                    var destinationStack = new StackLayout
-                    {
-                        Orientation = StackOrientation.Vertical,
-                        HorizontalOptions = LayoutOptions.Center,
-                        VerticalOptions = LayoutOptions.Center
-                    };
 
                     // Przeznaczenie (większy tekst)
                     var destinationLabel = new Label
@@ -239,22 +224,21 @@ namespace InventoryManagment.Views
                         FontSize = 14
                     };
 
+   
+
+
+                    // Dodajemy StackLayout do Grida w kolumnie 1
+                    grid.Add(destinationLabel, 1, 0);
                     // Opis (mniejszy, szary tekst)
                     var descriptionLabel = new Label
                     {
                         Text = item.Produkt.Opis,
                         HorizontalTextAlignment = TextAlignment.Center,
                         VerticalTextAlignment = TextAlignment.Center,
-                        FontSize = 12,
-                        TextColor = Colors.Gray
+                        FontSize = 14
                     };
+                    grid.Add(descriptionLabel, 2, 0);
 
-                    // Dodajemy oba labele do StackLayout
-                    destinationStack.Children.Add(destinationLabel);
-                    destinationStack.Children.Add(descriptionLabel);
-
-                    // Dodajemy StackLayout do Grida w kolumnie 1
-                    grid.Add(destinationStack, 1, 0);
                     // Stan produktu
                     var stockLabel = new Label
                     {
@@ -264,7 +248,7 @@ namespace InventoryManagment.Views
                         Margin = new Thickness(0, 0, 20, 0),
                         FontSize = 14
                     };
-                    grid.Add(stockLabel, 2, 0);
+                    grid.Add(stockLabel, 3, 0);
 
                     // Przycisk Edytuj
                     var editButton = new ImageButton
@@ -284,7 +268,7 @@ namespace InventoryManagment.Views
                         await Navigation.PushAsync(new ProductEditPage(item.Produkt));
                     };
 
-                    grid.Add(editButton, 3, 0);
+                    grid.Add(editButton, 4, 0);
 
                     ProductRowsStack.Children.Add(grid);
                 }

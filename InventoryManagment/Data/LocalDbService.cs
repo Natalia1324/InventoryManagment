@@ -98,22 +98,33 @@ namespace InventoryManagment.Data
             }
         }
 
-        public async Task DeleteDokument(int id)
+        public async Task DeleteDokument(Dokumenty dokument)
         {
             try
             {
-                var dokument = await GetDokumentById(id);
                 if (dokument != null)
                 {
+                    // Usunięcie wszystkich transakcji powiązanych z dokumentem
+                    var transakcjeDoUsuniecia = await _connection.Table<Transakcje>()
+                        .Where(t => t.DokumentId == dokument.Id)
+                        .ToListAsync();
+
+                    foreach (var transakcja in transakcjeDoUsuniecia)
+                    {
+                        await _connection.DeleteAsync(transakcja);
+                    }
+
+                    // Usunięcie dokumentu po usunięciu transakcji
                     await _connection.DeleteAsync(dokument);
                 }
             }
             catch (Exception ex)
             {
-                ErrorLogger.LogError($"Błąd przy usuwaniu dokumentu o ID {id}", ex);
-                throw new Exception("Nie usunieto dokumentu");
+                ErrorLogger.LogError($"Błąd przy usuwaniu dokumentu o ID {dokument?.Id}", ex);
+                throw new Exception("Nie usunięto dokumentu");
             }
         }
+
 
         public async Task<List<Dokumenty>?> GetDocumentsForMonth(int month, int year)
         {
@@ -194,12 +205,17 @@ namespace InventoryManagment.Data
 
         public async Task<List<Produkty>> SearchProdukty(string query, int limit)
         {
-            return await _connection.Table<Produkty>()
-                .Where(p => !p.isDel && (p.ToString().Contains(query) || p.Kolor.Contains(query)))
+            var produkty = await _connection.Table<Produkty>()
+                .Where(p => !p.isDel) // Filtrowanie tylko po warunku isDel
                 .OrderBy(p => p.Rozmiar)
+                .ToListAsync(); // Pobranie danych do pamięci
+
+            return produkty
+                .Where(p => p.ToStringFull().ToLower().Contains(query)) // Filtrowanie w pamięci
                 .Take(limit)
-                .ToListAsync();
+                .ToList();
         }
+
 
         // ==============================
         // 📌 CRUD dla Transakcje
@@ -260,6 +276,71 @@ namespace InventoryManagment.Data
 
             }
         }
+
+        // DELETE (Usuń transakcję)
+        public async Task DeleteTransakcja(Transakcje transakcja)
+        {
+            try
+            {
+                await _connection.DeleteAsync(transakcja);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError("Błąd przy usuwaniu transakcji", ex);
+                throw new Exception("Nie usunięto transakcji");
+
+            }
+        }
+        public async Task<List<Transakcje>> GetTransakcjePaginated(int offset, int limit, bool ascending)
+        {
+            string sortDirection = ascending ? "ASC" : "DESC";
+
+            string query = @"
+        SELECT 
+            t.Id, 
+            t.Dostawca, 
+            t.Zmiana_Stanu, 
+            t.Notatka, 
+            t.DokumentId, 
+            t.ProduktId, 
+            d.Data_Wystawienia, 
+            d.Przeznaczenie
+        FROM Transakcje t
+        JOIN Dokumenty d ON t.DokumentId = d.Id
+        ORDER BY d.Data_Wystawienia " + sortDirection + @"
+        LIMIT @Limit OFFSET @Offset;
+    ";
+
+            var transakcje = await _connection.QueryAsync<TransakcjaZDokumentem>(
+                query, new { Limit = limit, Offset = offset });
+
+            return transakcje.Select(t => new Transakcje
+            {
+                Id = t.Id,
+                DokumentId = t.DokumentId,
+                ProduktId = t.ProduktId,
+                Dostawca = t.Dostawca,
+                Zmiana_Stanu = t.Zmiana_Stanu,
+                Notatka = t.Notatka
+            }).ToList();
+        }
+        public async Task<List<Transakcje>> GetSortedTransakcje(bool ascending)
+        {
+            string sortDirection = ascending ? "ASC" : "DESC";
+
+            string query = @"
+        SELECT t.Id, t.Dostawca, t.Zmiana_Stanu, t.Notatka, t.DokumentId, t.ProduktId
+        FROM Transakcje t
+        JOIN Dokumenty d ON t.DokumentId = d.Id
+        ORDER BY d.Data_Wystawienia " + sortDirection;
+
+            var transakcje = await _connection.QueryAsync<Transakcje>(query);
+            return transakcje.ToList();
+        }
+
+
+
+
         // UPDATE (Aktualizuj produkt)
         public async Task UpdateProdukt(Produkty produkt)
         {
@@ -274,6 +355,8 @@ namespace InventoryManagment.Data
 
             }
         }
+
+
         public async Task ImportProductsFromJson(string filePath)
         {
             try

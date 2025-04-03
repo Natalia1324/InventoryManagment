@@ -18,19 +18,19 @@
             <Entry Placeholder="Filtruj po notatkach" TextChanged="OnFilterChanged" x:Name="NoteFilter" Grid.Column="6" />
         </Grid>
 
-        <!-- Nagłówki tabeli -->
+        <!-- Nagłówki tabeli (teraz jako przyciski do sortowania) -->
         <Grid ColumnDefinitions="2*, *, *, *, *, *, *" BackgroundColor="#e0e0e0" Padding="10" Margin="0" Grid.Row="2">
-            <Label Text="Produkt" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0" />
-            <Label Text="Nadawca/Dostawca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="1" />
-            <Label Text="Typ dokumentu" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="2" />
-            <Label Text="Dostawca" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="3" />
-            <Label Text="Data" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="4" />
-            <Label Text="Ilość" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="5" />
-            <Label Text="Notatka" FontAttributes="Bold" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="6" />
+            <Button Text="Produkt ↑↓" Clicked="OnSortClicked" CommandParameter="Produkt" FontAttributes="Bold" Grid.Column="0" />
+            <Button Text="Nadawca/Dostawca ↑↓" Clicked="OnSortClicked" CommandParameter="Przeznaczenie" FontAttributes="Bold" Grid.Column="1" />
+            <Button Text="Typ dokumentu ↑↓" Clicked="OnSortClicked" CommandParameter="TypDokumentu" FontAttributes="Bold" Grid.Column="2" />
+            <Button Text="Dostawca ↑↓" Clicked="OnSortClicked" CommandParameter="Dostawca" FontAttributes="Bold" Grid.Column="3" />
+            <Button Text="Data ↑↓" Clicked="OnSortClicked" CommandParameter="DataWystawienia" FontAttributes="Bold" Grid.Column="4" />
+            <Button Text="Ilość ↑↓" Clicked="OnSortClicked" CommandParameter="ZmianaStanu" FontAttributes="Bold" Grid.Column="5" />
+            <Button Text="Notatka ↑↓" Clicked="OnSortClicked" CommandParameter="Notatka" FontAttributes="Bold" Grid.Column="6" />
         </Grid>
 
         <!-- Scrollowalna lista transakcji -->
-        <ScrollView Grid.Row="3" Margin="0" Padding="0" BackgroundColor="Transparent">
+        <ScrollView Grid.Row="3" Margin="0" Padding="0" BackgroundColor="Transparent" Scrolled="OnScrolled">
             <VerticalStackLayout x:Name="TransactionRowsStack" Spacing="0" Margin="0">
                 <!-- Dynamiczne wiersze z transakcjami będą dodawane tutaj -->
             </VerticalStackLayout>

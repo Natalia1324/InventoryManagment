@@ -4,6 +4,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="0">
+
             <!-- Szczegóły dokumentu -->
             <Frame CornerRadius="10" Padding="15" BackgroundColor="#f8f8f8" HasShadow="True" Margin="20">
                 <VerticalStackLayout Spacing="10">
@@ -28,6 +29,9 @@
 
             <!-- Lista transakcji -->
             <VerticalStackLayout x:Name="TransactionRowsStack" Padding="0" Margin="0" Spacing="0" />
+            <Button Text="Edytuj Dokument" Margin="0,20,0,0" Clicked="EditDocument" BackgroundColor="DarkBlue"/>
+            <Button Text="Usuń Dokument" Margin="0,20,0,0" Clicked="DeleteDocument" BackgroundColor="DarkRed"/>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

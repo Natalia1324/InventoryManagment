@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.DocumentEditPage">
+    <StackLayout>
+        <Label Text="Edytuj dokument" HorizontalOptions="Center" VerticalOptions="Center" FontSize="26"/>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+
+                <Label Text="Data Wystawienia:" FontSize="16"/>
+                <DatePicker x:Name="DataWystawieniaDatePicker"/>
+
+                <Label Text="Przeznaczenie:" FontSize="16"/>
+                <Entry x:Name="PrzeznaczenieEntry"/>
+
+                <Label Text="Typ Dokumentu:" FontSize="16"/>
+                <Picker x:Name="TypDokumentuPicker" />
+
+                <Label Text="Transakcje:" FontSize="18" FontAttributes="Bold" />
+                <VerticalStackLayout x:Name="TransactionRowsStack"/>
+
+                <Button Text="Zapisz zmiany" Clicked="SaveChanges" BackgroundColor="DarkBlue"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>

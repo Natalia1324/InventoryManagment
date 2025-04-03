@@ -110,7 +110,7 @@ namespace InventoryManagment.Views
 
                     grid.Add(new Label
                     {
-                        Text = product != null ? product.ToString() : "Brak produktu",
+                        Text = product != null ? product.ToStringFull() : "Brak produktu",
                         HorizontalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                         VerticalTextAlignment = Microsoft.Maui.TextAlignment.Center,
                         FontSize = 14
@@ -149,5 +149,25 @@ namespace InventoryManagment.Views
                 await DisplayAlert("Błąd", "Nie udało się załadować transakcji.", "OK");
             }
         }
+        private async void EditDocument(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DocumentEditPage(_document));
+        }
+        private async void DeleteDocument(object sender, EventArgs e)
+        {
+            bool confirm = await DisplayAlert(
+                "Potwierdzenie usunięcia",
+                "Czy na pewno chcesz usunąć dokument? Spowoduje to usunięcie wszystkich transakcji wchodzących w jego skład.",
+                "Tak",
+                "Nie"
+            );
+
+            if (confirm)
+            {
+                await _dbService.DeleteDokument(_document);
+                await Navigation.PopAsync();
+            }
+        }
+
     }
 }

@@ -12,6 +12,12 @@ namespace InventoryManagment.Views
     {
         private readonly LocalDbService _dbService;
         private List<Dokumenty> _allDocuments = new();
+        private List<Dokumenty> _displayedDocuments = new();
+
+        private int currentOffset = 0;
+        private bool isLoading = false;
+        private bool hasMoreData = true;
+        private const int PageSize = 50;
 
         public DocumentListPage()
         {
@@ -25,6 +31,7 @@ namespace InventoryManagment.Views
             try
             {
                 await LoadDocuments();
+                LoadNextPage(); // Załaduj pierwsze 50 rekordów
             }
             catch (Exception ex)
             {
@@ -36,30 +43,41 @@ namespace InventoryManagment.Views
         {
             try
             {
+                isLoading = true;
+                _allDocuments.Clear();
+                _displayedDocuments.Clear();
+                currentOffset = 0;
+                hasMoreData = true;
+
                 var documents = await _dbService.GetDokumenty();
                 _allDocuments = documents?
                     .Where(d => d?.Przeznaczenie != "Wyrównanie Stanu Magazynowego")
                     .OrderByDescending(d => d?.Data_Wystawienia)
                     .ToList() ?? new List<Dokumenty>();
 
-                RenderDocumentList(_allDocuments);
+                LoadNextPage();
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Błąd", $"Wystąpił problem podczas pobierania dokumentów: {ex.Message}", "OK");
                 _allDocuments = new List<Dokumenty>();
             }
+            finally
+            {
+                isLoading = false;
+            }
         }
 
-        private string TypDokumentuToString(string? typ)
+        private void LoadNextPage()
         {
-            return typ switch
-            {
-                "Rozchod_Zewnetrzny" => "Rozchód Zewnętrzny",
-                "Przychod_Wewnetrzny" => "Przychód Wewnętrzny",
-                "Przychod_Zewnetrzny" => "Przychód Zewnętrzny",
-                _ => typ ?? "Nieznany typ"
-            };
+            if (!hasMoreData || isLoading) return;
+
+            var nextBatch = _allDocuments.Skip(currentOffset).Take(PageSize).ToList();
+            _displayedDocuments.AddRange(nextBatch);
+            currentOffset += nextBatch.Count;
+            hasMoreData = nextBatch.Count == PageSize; // Jeśli mniej niż PageSize, nie ma więcej danych
+
+            RenderDocumentList(_displayedDocuments);
         }
 
         private void RenderDocumentList(List<Dokumenty> documents)
@@ -131,7 +149,6 @@ namespace InventoryManagment.Views
                 }
             }
         });
-
                 var tapGesture = new TapGestureRecognizer();
                 tapGesture.Tapped += async (s, e) => await ShowDocumentDetails(doc);
                 grid.GestureRecognizers.Add(tapGesture);
@@ -174,7 +191,23 @@ namespace InventoryManagment.Views
                     doc.Przeznaczenie?.ToLower().Contains(searchText) == true)
                 .ToList();
 
-            RenderDocumentList(filtered);
+            _displayedDocuments.Clear();
+            currentOffset = 0;
+            hasMoreData = true;
+            _displayedDocuments.AddRange(filtered.Take(PageSize));
+            currentOffset = _displayedDocuments.Count;
+            hasMoreData = filtered.Count > currentOffset;
+
+            RenderDocumentList(_displayedDocuments);
+        }
+
+        private void OnScrolled(object sender, ScrolledEventArgs e)
+        {
+            var scrollView = (ScrollView)sender;
+            if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
+            {
+                LoadNextPage();
+            }
         }
 
         private async Task ShowDocumentDetails(Dokumenty doc)
@@ -193,6 +226,17 @@ namespace InventoryManagment.Views
             {
                 await DisplayAlert("Błąd", $"Nie udało się otworzyć szczegółów dokumentu: {ex.Message}", "OK");
             }
+        }
+
+        private string TypDokumentuToString(string? typ)
+        {
+            return typ switch
+            {
+                "Rozchod_Zewnetrzny" => "Rozchód Zewnętrzny",
+                "Przychod_Wewnetrzny" => "Przychód Wewnętrzny",
+                "Przychod_Zewnetrzny" => "Przychód Zewnętrzny",
+                _ => typ ?? "Nieznany typ"
+            };
         }
     }
 }
