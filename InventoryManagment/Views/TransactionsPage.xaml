@@ -20,13 +20,13 @@
 
         <!-- Nagłówki tabeli (teraz jako przyciski do sortowania) -->
         <Grid ColumnDefinitions="2*, *, *, *, *, *, *" BackgroundColor="#e0e0e0" Padding="10" Margin="0" Grid.Row="2">
-            <Button Text="Produkt ↑↓" Clicked="OnSortClicked" CommandParameter="Produkt" FontAttributes="Bold" Grid.Column="0" />
+            <Button Text="Produkt ↑↓" Clicked="OnSortClicked"  CommandParameter="Produkt" FontAttributes="Bold" Grid.Column="0" />
             <Button Text="Nadawca/Dostawca ↑↓" Clicked="OnSortClicked" CommandParameter="Przeznaczenie" FontAttributes="Bold" Grid.Column="1" />
             <Button Text="Typ dokumentu ↑↓" Clicked="OnSortClicked" CommandParameter="TypDokumentu" FontAttributes="Bold" Grid.Column="2" />
             <Button Text="Dostawca ↑↓" Clicked="OnSortClicked" CommandParameter="Dostawca" FontAttributes="Bold" Grid.Column="3" />
-            <Button Text="Data ↑↓" Clicked="OnSortClicked" CommandParameter="DataWystawienia" FontAttributes="Bold" Grid.Column="4" />
-            <Button Text="Ilość ↑↓" Clicked="OnSortClicked" CommandParameter="ZmianaStanu" FontAttributes="Bold" Grid.Column="5" />
-            <Button Text="Notatka ↑↓" Clicked="OnSortClicked" CommandParameter="Notatka" FontAttributes="Bold" Grid.Column="6" />
+            <Button Text="Data ↑↓" Clicked="OnSortClicked"  CommandParameter="DataWystawienia" FontAttributes="Bold" Grid.Column="4" />
+            <Button Text="Ilość ↑↓" Clicked="OnSortClicked"  CommandParameter="ZmianaStanu" FontAttributes="Bold" Grid.Column="5" />
+            <Button Text="Notatka ↑↓" Clicked="OnSortClicked"  CommandParameter="Notatka" FontAttributes="Bold" Grid.Column="6" />
         </Grid>
 
         <!-- Scrollowalna lista transakcji -->

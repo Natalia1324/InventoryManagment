@@ -47,7 +47,6 @@ public partial class ProductSelectionPage : ContentPage
         }
     }
 
-
     private async Task LoadProductsAndStock()
     {
         var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).OrderBy(p => p.ToString()).ToList();
@@ -66,7 +65,6 @@ public partial class ProductSelectionPage : ContentPage
             ProductListView.ItemsSource = _productWithStock;
         }
         else throw new Exception("Product Managment: Błąd pobierania bazy danych");
-
     }
     private static int GetStockChange(Transakcje t, List<Dokumenty>? dokumenty)
     {
@@ -97,7 +95,6 @@ public partial class ProductSelectionPage : ContentPage
             if (e?.Item is ProductWithStock selectedProduct && selectedProduct.Produkt != null)
             {
                 ProductSelected?.Invoke(this, selectedProduct.Produkt);
-                // Navigation.PopAsync();
             }
         }
         catch (Exception ex)
@@ -126,6 +123,22 @@ public partial class ProductSelectionPage : ContentPage
         catch (Exception ex)
         {
             ErrorLogger.LogError("ProductSelection: Błąd filtrowania", ex);
+        }
+    }
+
+    private void OnProductPointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Border border)
+        {
+            border.Background = new SolidColorBrush(Colors.LightBlue);
+        }
+    }
+
+    private void OnProductPointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is Border border)
+        {
+            border.Background = new SolidColorBrush(Colors.Transparent);
         }
     }
 

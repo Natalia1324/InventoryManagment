@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="InventoryManagment.Views.DateSelectPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Title="DatePickerPage">
+
+    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+        <Grid ColumnDefinitions="*, *">
+            <Label Text="Wybierz datę remanentu:"
+               FontSize="18"
+               HorizontalOptions="End" Grid.Column="0" Margin="0,0,20,0"/>
+
+            <DatePicker x:Name="RemanentDatePicker"
+                    Date="{x:Static sys:DateTime.Today}" Grid.Column="1" HorizontalOptions="Start"/>
+        </Grid>
+
+        <Grid ColumnDefinitions="*, *" Padding="10">
+
+            <Button Text="Wybierz"
+                Clicked="OnConfirmClicked"
+                BackgroundColor="DarkGreen"
+                TextColor="White" Grid.Column="0" HorizontalOptions="End" Margin="0,0,20,0"/>
+
+            <Button Text="Anuluj"
+                Clicked="OnCancelClicked"
+                BackgroundColor="DarkRed"
+                TextColor="White" Grid.Column="1" HorizontalOptions="Start"/>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

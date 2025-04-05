@@ -38,11 +38,18 @@
     </FlyoutItem>
 
     <Shell.FlyoutFooter>
-        <Grid Padding="10">
+        <Grid  RowDefinitions="*, *" Padding="10">
             <Button Text="Eksportuj bazę do chmury"
                 Clicked="OnExportDatabaseClicked"
                 Margin="10, 5, 10, 5"
                 BackgroundColor="Transparent"
+                Grid.Row="1"
+                TextColor="White"/>
+            <Button Text="Eksportuj remament do pliku"
+                Clicked="ExportStockToPdf"
+                Margin="10, 5, 10, 5"
+                BackgroundColor="Transparent"
+                Grid.Row="0"
                 TextColor="White"/>
         </Grid>
     </Shell.FlyoutFooter>

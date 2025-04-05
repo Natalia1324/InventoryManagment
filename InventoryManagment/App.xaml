@@ -60,7 +60,7 @@
                             <!-- Hover (PointerOver) -->
                             <VisualState Name="PointerOver">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="Blue" />
+                                    <Setter Property="BackgroundColor" Value="DarkBlue" />
                                     <!-- Zmiana tła -->
                                     <Setter Property="TextColor" Value="White" />
                                     <!-- Zmiana koloru tekstu -->
