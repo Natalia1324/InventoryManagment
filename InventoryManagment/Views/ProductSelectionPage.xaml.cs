@@ -49,7 +49,7 @@ public partial class ProductSelectionPage : ContentPage
 
     private async Task LoadProductsAndStock()
     {
-        var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).OrderBy(p => p.ToString()).ToList();
+        var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).OrderBy(p => p.ToStringFull()).ToList();
         var transakcje = await _dbService.GetTransakcje();
         var dokumenty = await _dbService.GetDokumenty();
 
@@ -117,7 +117,7 @@ public partial class ProductSelectionPage : ContentPage
             ProductListView.ItemsSource = string.IsNullOrEmpty(searchText)
                 ? _productWithStock
                 : _productWithStock
-                    .Where(p => p.Produkt != null && p.Produkt.ToString().ToLower().Contains(searchText))
+                    .Where(p => p.Produkt != null && p.Produkt.ToStringFull().ToLower().Contains(searchText))
                     .ToList();
         }
         catch (Exception ex)

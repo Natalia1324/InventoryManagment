@@ -9,7 +9,11 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="5">
-                            <Label Text="{Binding Produkt}" FontSize="16" FontAttributes="Bold" />
+                            <Grid ColumnDefinitions="Auto, *">
+                                <Label Text="{Binding Produkt}" FontSize="16" FontAttributes="Bold" Grid.Column="0" />
+                                <Label Text="{Binding Produkt.Przeznaczenie}" FontSize="16" Margin="5,0,0,0" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Start"/>
+                            </Grid>
+                            <Label Text="{Binding Produkt.Opis, StringFormat='Opis: {0}'}" FontSize="14" TextColor="Gray" />
                             <Label Text="{Binding Stock, StringFormat='Na magazynie: {0}'}" FontSize="14" TextColor="Gray" />
                         </StackLayout>
                     </ViewCell>
