@@ -28,7 +28,9 @@
             </Grid>
 
             <!-- Lista transakcji -->
-            <VerticalStackLayout x:Name="TransactionRowsStack" Padding="0" Margin="0" Spacing="0" />
+            <ScrollView>
+                <VerticalStackLayout x:Name="TransactionRowsStack" Padding="0" Margin="0" Spacing="0" />
+            </ScrollView>
             <Button Text="Edytuj Dokument" Margin="0,20,0,0" Clicked="EditDocument" BackgroundColor="DarkBlue"/>
             <Button Text="Usuń Dokument" Margin="0,20,0,0" Clicked="DeleteDocument" BackgroundColor="DarkRed"/>
 

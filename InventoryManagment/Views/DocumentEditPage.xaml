@@ -2,26 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InventoryManagment.Views.DocumentEditPage">
-    <StackLayout>
-        <Label Text="Edytuj dokument" HorizontalOptions="Center" VerticalOptions="Center" FontSize="26"/>
-        <ScrollView>
-            <VerticalStackLayout Padding="20">
 
-                <Label Text="Data Wystawienia:" FontSize="16"/>
-                <DatePicker x:Name="DataWystawieniaDatePicker"/>
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
 
-                <Label Text="Przeznaczenie:" FontSize="16"/>
-                <Entry x:Name="PrzeznaczenieEntry"/>
+        <!-- Nagłówek strony -->
+        <Label Grid.Row="0"
+           Text="Edytuj dokument"
+           HorizontalOptions="Center"
+           FontSize="26"
+           Margin="0,20,0,10"/>
 
-                <Label Text="Typ Dokumentu:" FontSize="16"/>
-                <Picker x:Name="TypDokumentuPicker" />
+        <!-- Formularz -->
+        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="15">
+            <Label Text="Data Wystawienia:" FontSize="16"/>
+            <DatePicker x:Name="DataWystawieniaDatePicker"/>
 
-                <Label Text="Transakcje:" FontSize="18" FontAttributes="Bold" />
-                <VerticalStackLayout x:Name="TransactionRowsStack"/>
+            <Label Text="Przeznaczenie:" FontSize="16"/>
+            <Entry x:Name="PrzeznaczenieEntry"/>
 
-                <Button Text="Zapisz zmiany" Clicked="SaveChanges" BackgroundColor="DarkBlue"/>
-            </VerticalStackLayout>
+            <Label Text="Typ Dokumentu:" FontSize="16"/>
+            <Picker x:Name="TypDokumentuPicker" />
+
+            <Label Text="Transakcje:" FontSize="18" FontAttributes="Bold" />
+
+            <!-- TABELA - NAGŁÓWKI -->
+            <Grid ColumnSpacing="5"
+              RowSpacing="0"
+              Padding="5,10"
+              BackgroundColor="LightGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Nazwa produktu" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="0"/>
+                <Label Text="Ilość" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="1"/>
+                <Label Text="Dostawca" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="2"/>
+                <Label Text="Notatka" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="3"/>
+                <Label Text="Usuń" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="4"/>
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- Lista transakcji (przewijalna) -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout x:Name="TransactionRowsStack" Padding="20" Spacing="10"/>
         </ScrollView>
-    </StackLayout>
+
+        <!-- Przycisk zapisu -->
+        <Button Grid.Row="3"
+            Text="Zapisz zmiany"
+            Clicked="SaveChanges"
+            BackgroundColor="DarkBlue"
+            TextColor="White"
+            Margin="20,10"
+            HeightRequest="50"/>
+    </Grid>
 
 </ContentPage>

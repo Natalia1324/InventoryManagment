@@ -93,14 +93,6 @@ public partial class DocumentEditPage : ContentPage
             BackgroundColor = Colors.LightGray
         };
 
-        headerGrid.Add(new Label { Text = "Nazwa produktu", FontSize = 14, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center }, 0, 0);
-        headerGrid.Add(new Label { Text = "Ilość", FontSize = 14, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center }, 1, 0);
-        headerGrid.Add(new Label { Text = "Dostawca", FontSize = 14, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center }, 2, 0);
-        headerGrid.Add(new Label { Text = "Notatka", FontSize = 14, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center }, 3, 0);
-        headerGrid.Add(new Label { Text = "Usuń", FontSize = 14, FontAttributes = FontAttributes.Bold, HorizontalTextAlignment = TextAlignment.Center }, 4, 0);
-
-        TransactionRowsStack.Children.Add(headerGrid);
-
         foreach (var transaction in _transactions)
         {
             var product = _products.FirstOrDefault(p => p.Id == transaction.ProduktId);
