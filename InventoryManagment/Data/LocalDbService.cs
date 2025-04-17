@@ -16,7 +16,7 @@ namespace InventoryManagment.Data
 
         public LocalDbService()
         {
-            Debug.WriteLine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DB_NAME));
+            Debug.WriteLine("LocalDbService path:" + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DB_NAME));
             _connection = new SQLiteAsyncConnection((Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DB_NAME)));
             Task.Run(async () => await InitializeDatabase()).ConfigureAwait(false);
         }
