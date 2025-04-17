@@ -96,6 +96,19 @@ public partial class DocumentEditPage : ContentPage
         foreach (var transaction in _transactions)
         {
             var product = _products.FirstOrDefault(p => p.Id == transaction.ProduktId);
+
+            var activeProducts = _products.Where(p => !p.isDel).ToList();
+            var productDescriptions = activeProducts.Select(p => p.ToStringWithDesc()).ToList();
+
+            // Dodaj placeholder, jeśli obecny produkt jest usunięty
+            string deletedPlaceholder = null;
+            if (product != null && product.isDel)
+            {
+                deletedPlaceholder = product.ToStringFull() + " (USUNIĘTO)";
+                productDescriptions.Insert(0, deletedPlaceholder);
+            }
+
+
             var grid = new Grid
             {
                 ColumnDefinitions =
@@ -113,14 +126,16 @@ public partial class DocumentEditPage : ContentPage
             // Picker dla produktu
             var productPicker = new Picker
             {
-                ItemsSource = _products.Select(p => p.ToStringFull()).ToList(),
-                SelectedItem = product?.ToStringFull(),
+                ItemsSource = productDescriptions,
+                SelectedItem = product != null && product.isDel ? deletedPlaceholder : product?.ToStringWithDesc(),
                 FontSize = 14,
                 HorizontalTextAlignment = TextAlignment.Center
             };
+
             productPicker.SelectedIndexChanged += (s, e) =>
             {
-                var selectedProduct = _products.FirstOrDefault(p => p.ToStringFull() == productPicker.SelectedItem?.ToString());
+                var selectedText = productPicker.SelectedItem?.ToString();
+                var selectedProduct = activeProducts.FirstOrDefault(p => p.ToStringWithDesc() == selectedText);
                 if (selectedProduct != null)
                 {
                     transaction.ProduktId = selectedProduct.Id;

@@ -32,5 +32,13 @@ namespace InventoryManagment.Models
             return $"{Rozmiar} {Kolor} {(Grubosc.HasValue ? Grubosc.Value.ToString("0.###") : "")} {(Ilosc_Paczka.HasValue ? "A" : "")}{Ilosc_Paczka} {Przeznaczenie}";
 
         }
+
+        public string ToStringWithDesc()
+        {
+            var gruboscStr = Grubosc.HasValue ? $" {Grubosc.Value:0.###}" : "";
+            var iloscStr = Ilosc_Paczka.HasValue ? $" A{Ilosc_Paczka}" : "";
+            var opisStr = string.IsNullOrWhiteSpace(Opis) ? "" : $" ({Opis})";
+            return $"{Rozmiar} {Kolor} {gruboscStr} {iloscStr} {Przeznaczenie} {opisStr}";
+        }
     }
 }
