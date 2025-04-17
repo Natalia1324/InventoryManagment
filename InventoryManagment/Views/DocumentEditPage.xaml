@@ -3,27 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InventoryManagment.Views.DocumentEditPage">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="0" RowSpacing="0">
 
         <!-- Nagłówek strony -->
         <Label Grid.Row="0"
            Text="Edytuj dokument"
            HorizontalOptions="Center"
-           FontSize="26"
-           Margin="0,20,0,10"/>
+           FontSize="24"
+           FontAttributes="Bold"
+           Margin="0,20,0,30"/>
 
         <!-- Formularz -->
-        <VerticalStackLayout Grid.Row="1" Padding="20" Spacing="15">
-            <Label Text="Data Wystawienia:" FontSize="16"/>
-            <DatePicker x:Name="DataWystawieniaDatePicker"/>
+        <VerticalStackLayout Grid.Row="1" Padding="0" Spacing="0">
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
+                <Label Text="Data Wystawienia:" FontSize="16" Grid.Column="0" HorizontalOptions="Center"/>
+                <Label Text="Przeznaczenie:" FontSize="16" Grid.Column="1" HorizontalOptions="Center"/>
+                <Label Text="Typ Dokumentu:" FontSize="16" Grid.Column="2" HorizontalOptions="Center"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15" Margin="0,10,0,10">
+                <DatePicker x:Name="DataWystawieniaDatePicker" Grid.Column="0" HorizontalOptions="Center"/>
 
-            <Label Text="Przeznaczenie:" FontSize="16"/>
-            <Entry x:Name="PrzeznaczenieEntry"/>
+                <Entry x:Name="PrzeznaczenieEntry" Grid.Column="1" HorizontalOptions="Center"/>
 
-            <Label Text="Typ Dokumentu:" FontSize="16"/>
-            <Picker x:Name="TypDokumentuPicker" />
+                <Picker x:Name="TypDokumentuPicker" Grid.Column="2" Margin="20,0,0,0" HorizontalOptions="Center"/>
+            </Grid>
 
-            <Label Text="Transakcje:" FontSize="18" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*, auto" Margin="0,10,0,10">
+                <Label Text="Transakcje:" FontSize="18" FontAttributes="Bold" Margin="150,0,0,0" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="0"/>
+
+                <Button Text="Dodaj transakcję"
+        Clicked="AddTransaction"
+        BackgroundColor="DarkGreen"
+        TextColor="White"
+        Margin="0,10,20,10"
+        HeightRequest="40" 
+        HorizontalOptions="End" 
+        VerticalOptions="Center" Grid.Column="1"/>
+            </Grid>
+
 
             <!-- TABELA - NAGŁÓWKI -->
             <Grid ColumnSpacing="5"
@@ -39,7 +56,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Text="Nazwa produktu" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="0"/>
-                <Label Text="Ilość" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="1"/>
+                <Label Text="Ilość" Margin="15,0,0,0" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="1"/>
                 <Label Text="Dostawca" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="2"/>
                 <Label Text="Notatka" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="3"/>
                 <Label Text="Usuń" FontAttributes="Bold" FontSize="14" HorizontalTextAlignment="Center" Grid.Column="4"/>
@@ -58,7 +75,8 @@
             BackgroundColor="DarkBlue"
             TextColor="White"
             Margin="20,10"
-            HeightRequest="50"/>
+                WidthRequest="200"
+            HeightRequest="40"/>
     </Grid>
 
 </ContentPage>

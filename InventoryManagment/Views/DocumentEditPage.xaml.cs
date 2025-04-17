@@ -51,6 +51,64 @@ public partial class DocumentEditPage : ContentPage
             await DisplayAlert("Błąd", $"Wystąpił problem podczas zapisywania: {ex.Message}", "OK");
         }
     }
+    private async void AddTransaction(object sender, EventArgs e)
+    {
+        try
+        {
+            var productSelectionPage = new ProductSelectionPage();
+
+            productSelectionPage.ProductSelected += async (s, selectedProduct) =>
+            {
+                await OpenTransactionModal(selectedProduct);
+            };
+
+            await Navigation.PushAsync(productSelectionPage);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Błąd", $"Wystąpił problem podczas wyboru produktu: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task OpenTransactionModal(Produkty produkt, Transakcje existingTransaction = null)
+    {
+        try
+        {
+            var transaction = existingTransaction ?? new Transakcje
+            {
+                ProduktId = produkt?.Id ?? 0,
+                DokumentId = _document.Id // Powiąż z aktualnym dokumentem
+            };
+
+            // Automatyczne ustawienie dostawcy na podstawie przeznaczenia
+            if (_document.Typ_Dokumentu is TypDokumentu.Przychod_Wewnetrzny or TypDokumentu.Przychod_Zewnetrzny)
+            {
+                transaction.Dostawca = PrzeznaczenieEntry.Text;
+            }
+
+            var modalPage = new TransactionModelPage(transaction);
+            await Navigation.PushModalAsync(modalPage);
+
+            modalPage.Disappearing += async (s, e) =>
+            {
+                if (modalPage.IsSaved)
+                {
+                    if (existingTransaction == null)
+                    {
+                        await _dbService.CreateTransakcja(transaction); // dodaj do bazy
+                        _transactions.Add(transaction); // dodaj lokalnie
+                    }
+                    await Navigation.PopAsync();
+                    RenderTransactionList(); // odśwież listę
+                }
+            };
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Błąd", $"Nie udało się otworzyć modalu transakcji: {ex.Message}", "OK");
+        }
+    }
+
     private async Task LoadDocumentData()
     {
         // Wypełnienie pól dokumentu
@@ -87,7 +145,7 @@ public partial class DocumentEditPage : ContentPage
             new ColumnDefinition { Width = GridLength.Star },
             new ColumnDefinition { Width = GridLength.Star },
             new ColumnDefinition { Width = GridLength.Star },
-            new ColumnDefinition { Width = GridLength.Star }
+            new ColumnDefinition { Width = GridLength.Auto }
         },
             Padding = new Thickness(5, 10),
             BackgroundColor = Colors.LightGray
