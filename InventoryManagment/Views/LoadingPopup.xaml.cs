@@ -4,8 +4,9 @@ namespace InventoryManagment.Views;
 
 public partial class LoadingPopup : Popup
 {
-        public LoadingPopup()
+        public LoadingPopup(string nazwa)
         {
             InitializeComponent();
-        }
+            Label.Text = nazwa;
+    }
     }

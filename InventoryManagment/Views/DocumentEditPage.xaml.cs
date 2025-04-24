@@ -3,6 +3,7 @@ using InventoryManagment.Models;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,22 +14,28 @@ public partial class DocumentEditPage : ContentPage
 {
     private readonly LocalDbService _dbService;
     private Dokumenty _document;
-    private List<Transakcje> _transactions;
+    private List<Transakcje> _transactions = new();
+    private bool transactions_loaded = false;
     private List<Produkty> _products;
+    private List<Transakcje> _deletedTransactions = new(); // Nowe pole
 
     public DocumentEditPage(Dokumenty document)
     {
         InitializeComponent();
         _dbService = App.Services.GetRequiredService<LocalDbService>();
+
         _document = document ?? throw new ArgumentNullException(nameof(document));
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await LoadDocumentData();
+        Debug.WriteLine("I appeared!!!");
         await LoadTransactions();
+        await LoadDocumentData();
+        Debug.WriteLine("I appeared!!!");
     }
+
     private async void SaveChanges(object sender, EventArgs e)
     {
         try
@@ -38,10 +45,21 @@ public partial class DocumentEditPage : ContentPage
             _document.Typ_Dokumentu = TypDokumentuToEnum(TypDokumentuPicker.SelectedItem.ToString());
 
             await _dbService.UpdateDokument(_document);
+
             foreach (var transakcje in _transactions)
             {
-                await _dbService.UpdateTransakcja(transakcje);
+                if (transakcje.Id == 0) // nowa transakcja
+                    await _dbService.CreateTransakcja(transakcje);
+                else
+                    await _dbService.UpdateTransakcja(transakcje);
             }
+
+            foreach (var deleted in _deletedTransactions)
+            {
+                await _dbService.DeleteTransakcja(deleted);
+            }
+
+            _deletedTransactions.Clear();
 
             await DisplayAlert("Sukces", "Dokument i transakcje zostały zapisane.", "OK");
             await Navigation.PopAsync();
@@ -51,17 +69,21 @@ public partial class DocumentEditPage : ContentPage
             await DisplayAlert("Błąd", $"Wystąpił problem podczas zapisywania: {ex.Message}", "OK");
         }
     }
+
     private async void AddTransaction(object sender, EventArgs e)
     {
+        Debug.WriteLine("Dodajemy transakcje!");
         try
         {
             var productSelectionPage = new ProductSelectionPage();
 
             productSelectionPage.ProductSelected += async (s, selectedProduct) =>
             {
+                Debug.WriteLine("Wybrano produkt" + selectedProduct.ToStringFull());
                 await OpenTransactionModal(selectedProduct);
             };
 
+            Debug.WriteLine("dodano! yay");
             await Navigation.PushAsync(productSelectionPage);
         }
         catch (Exception ex)
@@ -72,6 +94,7 @@ public partial class DocumentEditPage : ContentPage
 
     private async Task OpenTransactionModal(Produkty produkt, Transakcje existingTransaction = null)
     {
+        Debug.WriteLine($"OpenTransactionModal: {produkt?.ToString()}");
         try
         {
             var transaction = existingTransaction ?? new Transakcje
@@ -88,20 +111,24 @@ public partial class DocumentEditPage : ContentPage
 
             var modalPage = new TransactionModelPage(transaction);
             await Navigation.PushModalAsync(modalPage);
-
+            Debug.WriteLine("Modal page opened");
             modalPage.Disappearing += async (s, e) =>
             {
+                Debug.WriteLine("Modal page closed");
                 if (modalPage.IsSaved)
                 {
                     if (existingTransaction == null)
                     {
-                        await _dbService.CreateTransakcja(transaction); // dodaj do bazy
+                        //await _dbService.CreateTransakcja(transaction); // dodaj do bazy
                         _transactions.Add(transaction); // dodaj lokalnie
                     }
                     await Navigation.PopAsync();
-                    RenderTransactionList(); // odśwież listę
+                    Debug.WriteLine("popped");
+                    //RenderTransactionList(); // odśwież listę
+                    //Debug.WriteLine("list rendered");
                 }
             };
+            Debug.WriteLine("modal disapeared");
         }
         catch (Exception ex)
         {
@@ -111,6 +138,7 @@ public partial class DocumentEditPage : ContentPage
 
     private async Task LoadDocumentData()
     {
+        Debug.WriteLine("LoadDocumentData");
         // Wypełnienie pól dokumentu
         DataWystawieniaDatePicker.Date = _document.Data_Wystawienia;
         PrzeznaczenieEntry.Text = _document.Przeznaczenie;
@@ -124,11 +152,16 @@ public partial class DocumentEditPage : ContentPage
 
     private async Task LoadTransactions()
     {
+        Debug.WriteLine("LoadTransactions");
+
+        if (!_transactions.Any()) { 
+
         _transactions = await _dbService.GetTransakcje();
         _products = await _dbService.GetProdukty();
 
         _transactions = _transactions.Where(t => t.DokumentId == _document.Id).ToList();
 
+        }
         RenderTransactionList();
     }
 
@@ -257,9 +290,9 @@ public partial class DocumentEditPage : ContentPage
     private async void DeleteTransaction(Transakcje transaction)
     {
         _transactions.Remove(transaction);
-        try { 
-        await _dbService.DeleteTransakcja(transaction);
-        RenderTransactionList();
+        try {
+            _deletedTransactions.Add(transaction); // dodaj do usunięcia później
+            RenderTransactionList();
         }
         catch (Exception e)
         {

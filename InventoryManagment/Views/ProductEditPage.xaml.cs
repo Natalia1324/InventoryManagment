@@ -127,10 +127,32 @@ namespace InventoryManagment.Views
                 var newStock = int.TryParse(StockEntry.Text.Replace(" ", ""), out var stock) ? stock : _initialStock;
                 var stockDifference = newStock - _initialStock;
 
-                if (_product.Id != 0 && isOnlyStockChanged && stockDifference != 0)
+                bool isSameExceptOpisAndPrzeznaczenie =
+                _product.Rozmiar == newProduct.Rozmiar &&
+                _product.Grubosc == newProduct.Grubosc &&
+                _product.Kolor == newProduct.Kolor &&
+                _product.Ilosc_Paczka == newProduct.Ilosc_Paczka;
+
+                bool isOpisOrPrzeznaczenieChanged =
+                    _product.Opis != newProduct.Opis ||
+                    _product.Przeznaczenie != newProduct.Przeznaczenie;
+
+                if (_product.Id != 0 && isSameExceptOpisAndPrzeznaczenie)
                 {
-                    await UpdateStock(_product, newStock);
-                    await DisplayAlert("Zmieniono", "Zaktualizowano jedynie stan magazynowy.", "OK");
+                    // Tylko zmiana opisu lub przeznaczenia lub stocku
+                    if (isOpisOrPrzeznaczenieChanged)
+                    {
+                        _product.Opis = newProduct.Opis;
+                        _product.Przeznaczenie = newProduct.Przeznaczenie;
+                        await _dbService.UpdateProdukt(_product);
+                    }
+
+                    if (stockDifference != 0)
+                    {
+                        await UpdateStock(_product, newStock);
+                    }
+
+                    await DisplayAlert("Zmieniono", "Produkt został zaktualizowany.", "OK");
                 }
                 else
                 {

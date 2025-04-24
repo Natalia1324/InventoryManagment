@@ -39,8 +39,6 @@ public partial class ProductSelectionPage : ContentPage
     }
     private void HandleKeyDown(FrameworkElement sender, KeyRoutedEventArgs e)
     {
-        Debug.WriteLine($"Key Pressed: {e.Key}");
-
         if (e.Key == Windows.System.VirtualKey.Escape)
         {
             Navigation.PopAsync(); // Powrót do poprzedniej strony

@@ -139,7 +139,7 @@ namespace InventoryManagment
         }
         private async void OnExportDatabaseClicked(object sender, EventArgs e)
         {
-            var popup = new LoadingPopup();
+            var popup = new LoadingPopup("Eksportuje bazę...");
             try
             {
 
