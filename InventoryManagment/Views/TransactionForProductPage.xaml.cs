@@ -95,6 +95,18 @@ namespace InventoryManagment.Views
             }
         }
 
+        private string TypDokumentuToString(TypDokumentu? typ)
+        {
+            return typ switch
+            {
+                TypDokumentu.Rozchod_Zewnetrzny => "Rozchód Zewnętrzny",
+                TypDokumentu.Przychod_Wewnetrzny => "Przychód Wewnętrzny",
+                TypDokumentu.Przychod_Zewnetrzny => "Przychód Zewnętrzny",
+                null => "-", 
+                _ => "Nieznany typ"
+            };
+        }
+
         private void OnFilterChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -125,7 +137,10 @@ namespace InventoryManagment.Views
 
                     bool matchesProduct = trans.Produkt?.ToLower().Contains(productFilter) ?? false;
                     bool matchesDestination = trans.Przeznaczenie?.ToLower().Contains(destinationFilter) ?? false;
-                    bool matchesDocType = trans.TypDokumentu?.Contains(docTypeFilter) ?? false;
+                    bool matchesDocType = trans.TypDokumentu?
+                    .ToLower()
+                    .Contains(docTypeFilter.ToLower()) ?? false;
+
                     bool matchesSupplier = trans.Dostawca?.ToLower().Contains(supplierFilter) ?? false;
                     bool matchesDate = trans.DataWystawienia?.ToString("yyyy-MM-dd").ToLower().Contains(dateFilter) ?? false;
                     bool matchesQuantity = trans.ZmianaStanu?.ToLower().Contains(quantityFilter) ?? false;

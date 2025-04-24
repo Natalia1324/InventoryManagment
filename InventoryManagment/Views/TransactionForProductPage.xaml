@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="InventoryManagment.Views.TransactionForProductPage">
-    <StackLayout>
-        <Grid ColumnDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, *">
+        <Grid ColumnDefinitions="Auto, *" Grid.Row="0">
             <Label Text="Historia Przychodów i Rozchodów" Grid.Column="0" HorizontalOptions="Start" FontSize="24" FontAttributes="Bold" HeightRequest="50" Margin="20,20,0,0"/>
             <Button Text="Zobacz podsumowanie rozchodów" Grid.Column="1" HorizontalOptions="End"
         FontSize="16"
@@ -16,7 +16,7 @@
         </Grid>
 
 
-        <Grid RowDefinitions="Auto, Auto, *" Padding="20">
+        <Grid RowDefinitions="Auto, Auto, *" Padding="20" Grid.Row="1">
             <!-- Wiersz wyszukiwania -->
             <Grid ColumnDefinitions="*, *, *, *, *, *, *" Padding="5" Grid.Row="0">
                 <Entry Placeholder="Filtruj po produkcie" TextChanged="OnFilterChanged" x:Name="ProductFilter" />
@@ -62,5 +62,5 @@
 
             </ScrollView>
         </Grid>
-    </StackLayout>
+    </Grid>
 </ContentPage>
