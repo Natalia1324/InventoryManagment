@@ -2,6 +2,7 @@
 using InventoryManagment.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Maui.Views;
 
 namespace InventoryManagment.Views
 {
@@ -29,9 +30,21 @@ namespace InventoryManagment.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await LoadAllTransactions();
-            LoadNextPage(); // Wczytaj pierwsze 50 rekordów
+
+            var popup = new LoadingPopup("Ładuje...");
+            this.ShowPopup(popup); // pokaż popup
+
+            try
+            {
+                await LoadAllTransactions(); // ładowanie danych
+                LoadNextPage();              // paginacja lokalna
+            }
+            finally
+            {
+                popup.Close(); // schowaj popup, niezależnie czy był wyjątek
+            }
         }
+
 
         private async Task LoadAllTransactions()
         {

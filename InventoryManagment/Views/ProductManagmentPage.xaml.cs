@@ -13,6 +13,13 @@ namespace InventoryManagment.Views
     {
         private readonly LocalDbService _dbService;
         private List<ProductWithStock> _productWithStock = new();
+        private List<ProductWithStock> _visibleProducts = new();       // Lista widoczna w UI
+
+
+        private int currentOffset = 0;
+        private const int PageSize = 100;
+        private bool isLoading = false;
+        private bool hasMoreData = true;
 
         public ProductManagementPage()
         {
@@ -25,13 +32,60 @@ namespace InventoryManagment.Views
             base.OnAppearing();
             try
             {
-                await LoadProductsAndStock(true);
+                await LoadAllProductsOnce();
+                await LoadMoreVisibleProducts(reset: true);
             }
             catch (Exception ex)
             {
                 ErrorLogger.LogError("Product Managment: problem z załadowaniem strony", ex);
                 await DisplayAlert("Błąd", "Nie udało się załadować strony.", "OK");
             }
+        }
+        private async Task LoadAllProductsOnce()
+        {
+            var produkty = (await _dbService.GetProdukty())?.Where(p => !p.isDel).ToList() ?? new();
+            var transakcje = await _dbService.GetTransakcje();
+            var dokumenty = await _dbService.GetDokumenty();
+
+            _productWithStock = produkty
+                .OrderBy(p => p.ToString())
+                .Select(p => new ProductWithStock
+                {
+                    Produkt = p,
+                    Stock = transakcje.Where(t => t.ProduktId == p.Id)
+                                      .Sum(t => GetStockChange(t, dokumenty))
+                }).ToList();
+        }
+
+        private async Task LoadMoreVisibleProducts(bool reset = false)
+        {
+            if (isLoading || !hasMoreData) return;
+            isLoading = true;
+
+            if (reset)
+            {
+                currentOffset = 0;
+                hasMoreData = true;
+                _visibleProducts.Clear();
+            }
+
+            var nextChunk = _productWithStock
+                .Skip(currentOffset)
+                .Take(PageSize)
+                .ToList();
+
+            if (!nextChunk.Any())
+            {
+                hasMoreData = false;
+            }
+            else
+            {
+                _visibleProducts.AddRange(nextChunk);
+                currentOffset += nextChunk.Count;
+            }
+
+            RenderProductList(_visibleProducts);
+            isLoading = false;
         }
 
         //private async void LoadProductsAndStock()
@@ -71,10 +125,6 @@ namespace InventoryManagment.Views
             }
             return 0;
         }
-
-        private int currentOffset = 0;
-        private bool isLoading = false;
-        private bool hasMoreData = true;
 
         private async Task LoadProductsAndStock(bool reset = false)
         {
@@ -132,10 +182,10 @@ namespace InventoryManagment.Views
             var scrollView = (ScrollView)sender;
             if (scrollView.ScrollY >= scrollView.ContentSize.Height - scrollView.Height - 20)
             {
-                await LoadProductsAndStock();
+                await LoadMoreVisibleProducts();
             }
         }
-        
+
         private void RenderProductList(List<ProductWithStock> products)
         {
             try
@@ -285,24 +335,21 @@ namespace InventoryManagment.Views
             try
             {
                 var searchText = e.NewTextValue?.ToLower() ?? "";
+
                 if (string.IsNullOrWhiteSpace(searchText))
                 {
-                    await LoadProductsAndStock(reset: true);
+                    await LoadMoreVisibleProducts(reset: true);
                     return;
                 }
 
-                var produkty = await _dbService.SearchProdukty(searchText, 100);
-                var transakcje = await _dbService.GetTransakcje();
-                var dokumenty = await _dbService.GetDokumenty();
+                var filtered = _productWithStock
+                    .Where(p => p.Produkt.ToStringFull()?.ToLower().Contains(searchText) == true ||
+                                p.Produkt.Przeznaczenie?.ToLower().Contains(searchText) == true ||
+                                p.Produkt.Opis?.ToLower().Contains(searchText) == true)
+                    .ToList();
 
-                var filtered = produkty.Select(p => new ProductWithStock
-                {
-                    Produkt = p,
-                    Stock = transakcje.Where(t => t.ProduktId == p.Id)
-                                      .Sum(t => GetStockChange(t, dokumenty))
-                }).ToList();
-
-                RenderProductList(filtered);
+                _visibleProducts = filtered;
+                RenderProductList(_visibleProducts);
             }
             catch (Exception ex)
             {

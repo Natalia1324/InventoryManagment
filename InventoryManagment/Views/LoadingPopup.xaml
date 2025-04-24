@@ -5,11 +5,27 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="InventoryManagment.Views.LoadingPopup">
 
-    <Border Padding="20" BackgroundColor="White"
-           VerticalOptions="Center" HorizontalOptions="Center">
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <ActivityIndicator IsRunning="True" Color="Blue" WidthRequest="50" HeightRequest="50"/>
-            <Label x:Name="Label"  Text="Eksportowanie bazy..." FontSize="16" HorizontalOptions="Center"/>
+    <Border Padding="20"
+            BackgroundColor="White"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            StrokeThickness="1"
+            Stroke="LightGray"
+            MaximumWidthRequest="300"
+            >
+
+        <StackLayout HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Spacing="10">
+            <ActivityIndicator IsRunning="True"
+                               Color="Blue"
+                               WidthRequest="50"
+                               HeightRequest="50" />
+            <Label x:Name="Label"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   LineBreakMode="WordWrap"
+                   TextColor="Black" />
         </StackLayout>
     </Border>
 
